@@ -1,5 +1,6 @@
 :root {
     --color-background: #F2F2F2;
+    --color-background-button: #206877;
 }
 
 * {
@@ -12,7 +13,6 @@ body {
     background: var(--color-background);
 }
 
-.barra-menu{
-    background: red;
-}
+
+
 
