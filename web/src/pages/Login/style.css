@@ -16,7 +16,8 @@
     display: flex;
     align-content: center;
     justify-content: center;
-    flex-direction: row;
+    align-items: center;
+    flex-direction: column;
 }
 
 .login-card .login-logo {
@@ -24,8 +25,26 @@
     display: block;
 }
 
-.button {
-    width: 100% !important;
+.form-btn {
     color: white !important;
+    text-transform: none !important;
     background: var(--color-background-button) !important;
+    padding: 1.5% 12% !important;
+    border-radius: 15px !important;
 }
+
+.form-group{
+    width: 50%;
+}
+
+a.link-cadastro{
+    color : var(--color-text-green);
+}
+
+@media (max-width: 720px) {
+    .form-group{
+        width: 90%;
+    }
+}
+
+

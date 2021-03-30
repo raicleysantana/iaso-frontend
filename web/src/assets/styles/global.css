@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
 :root {
     --color-background: #F2F2F2;
     --color-background-button: #206877;
+    --color-text-gray: rgba(38, 50, 56, 0.5);
+    --color-text-green: #206877;
 }
 
 * {
@@ -11,8 +15,12 @@
 
 body {
     background: var(--color-background);
+    -webkit-font-smoothing: antialised;
 }
 
+body, input, button{
+    font-family: Roboto, sans-serif;
+}
 
 
 

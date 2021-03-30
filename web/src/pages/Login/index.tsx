@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
     AppBar,
     IconButton,
@@ -10,7 +10,10 @@ import {
     Card,
     CardContent,
     Grid,
-    TextField
+    TextField,
+    Checkbox,
+    FormControlLabel,
+    FormGroup
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './style.css';
@@ -22,12 +25,12 @@ function Login() {
             <AppBar position="static" color='inherit' className="barra-menu">
                 <Toolbar variant="dense">
                     <Link to="/">
-                        <IconButton edge="start">
-                            <ArrowBackIcon/>
+                        <IconButton edge="start" style={{ color: 'var(--color-text-green)' }}>
+                            <ArrowBackIcon />
                         </IconButton>
                     </Link>
                     <div className="appbar-content">
-                        <Typography variant="h6">Login</Typography>
+                        <Typography variant="h6" style={{ color: 'var(--color-text-gray)' }}>Login</Typography>
                     </div>
                 </Toolbar>
             </AppBar>
@@ -35,49 +38,59 @@ function Login() {
             <div id="login-content">
                 <Card>
                     <CardContent>
-                        <Grid
-                            container
-                            direction="column"
-                            justify="center"
-                            alignItems="center"
-                        >
-                            <Grid item md={12}>
-                                <img src={logo} className="login-logo"/>
-                            </Grid>
-                            <Grid item md={12}>
-                                <Typography variant="h5">Acessar o Sistema</Typography>
-                            </Grid>
-                            <br/>
-                            <Grid item md={12}>
+                        <div className="login-card">
+                            <div>
+                                <img src={logo} className="login-logo" />
+                            </div>
+                            <div>
+                                <Typography variant="h5" style={{ color: 'var(--color-text-gray)' }}>Acessar o Sistema</Typography>
+                            </div>
+
+                            <br />
+
+                            <div className="form-group">
                                 <TextField
                                     id="form-cpf"
                                     label="CPF"
-                                    style={{margin: 8}}
+                                    style={{ marginTop: 8, width: '100%' }}
                                     margin="normal"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                     variant="outlined"
                                 />
-                            </Grid>
+                            </div>
 
-                            <Grid item xs={12}>
+                            <div className="form-group">
                                 <TextField
                                     id="form-senha"
                                     label="Senha"
-                                    style={{margin: 8}}
+                                    style={{ marginTop: 8, width: '100%' }}
                                     margin="normal"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                     variant="outlined"
                                 />
-                            </Grid>
+                            </div>
 
-                            <Grid item xs={12}>
-                                <Button className="button" variant="contained">Entrar</Button>
-                            </Grid>
-                        </Grid>
+                            <div className="form-group" style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between' }}>
+                                <FormControlLabel
+                                    control={<Checkbox checked={false} name="checkedG" />}
+                                    label="Lembrar-se de mim"
+                                />
+                                <Button
+                                    className="form-btn"
+                                    variant="contained"
+                                >
+                                    Entrar
+                                </Button>
+                            </div>
+
+                            <div className="form-group" style={{ marginTop: 20, display: 'flex', justifyContent: 'space-between' }}>
+                                <small>Esqueceu sua senha</small> <small>Você ainda não tem uma conta? {<Link to="/cadastro" className="link-cadastro">Cadastre-se</Link>}</small>
+                            </div>
+                        </div>
 
                     </CardContent>
                 </Card>

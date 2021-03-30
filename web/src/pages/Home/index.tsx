@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 function Home() {
     return (<>
 
-            <AppBar position="fixed">
+            <AppBar position="fixed" color="inherit">
                 <Toolbar>
                     <Link to="/login">Entrar</Link>
                 </Toolbar>
