@@ -51,6 +51,7 @@ function Login() {
                             <div className="form-group">
                                 <TextField
                                     id="form-cpf"
+                                    className="input"
                                     label="CPF"
                                     style={{ marginTop: 8, width: '100%' }}
                                     margin="normal"
@@ -64,8 +65,9 @@ function Login() {
                             <div className="form-group">
                                 <TextField
                                     id="form-senha"
+                                    className="input"
                                     label="Senha"
-                                    style={{ marginTop: 8, width: '100%' }}
+                                    style={{ marginTop: 8, width: '100%'}}
                                     margin="normal"
                                     InputLabelProps={{
                                         shrink: true,
