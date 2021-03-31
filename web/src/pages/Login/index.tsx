@@ -43,7 +43,7 @@ function Login() {
                                 <img src={logo} className="login-logo" />
                             </div>
                             <div>
-                                <Typography variant="h5" style={{ color: 'var(--color-text-gray)' }}>Acessar o Sistema</Typography>
+                                <Typography variant="h6" style={{ color: 'var(--color-text-gray)' }}>Acessar o Sistema</Typography>
                             </div>
 
                             <br />
@@ -52,12 +52,13 @@ function Login() {
                                 <TextField
                                     id="form-cpf"
                                     className="input"
-                                    label="CPF"
+                                    label="CPF ou Cartão do SUS"
                                     style={{ marginTop: 8, width: '100%' }}
                                     margin="normal"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    fullWidth
                                     variant="outlined"
                                 />
                             </div>
@@ -72,6 +73,7 @@ function Login() {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    fullWidth
                                     variant="outlined"
                                 />
                             </div>
