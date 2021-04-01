@@ -95,7 +95,8 @@ function Login() {
                                 <small>Esqueceu sua senha</small> <small>Você ainda não tem uma conta? {<Link to="/cadastro" className="link-cadastro">Cadastre-se</Link>}</small>
                             </div>
                         </div>
-
+                        
+                        <br/>
                     </CardContent>
                 </Card>
             </div>
