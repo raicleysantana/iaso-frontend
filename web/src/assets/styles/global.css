@@ -18,8 +18,12 @@ body {
     -webkit-font-smoothing: antialised;
 }
 
-body, input, button{
+body, input, button {
     font-family: Roboto, sans-serif;
+}
+
+.content {
+    padding: 5%;
 }
 
 
