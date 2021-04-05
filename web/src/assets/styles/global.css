@@ -26,5 +26,12 @@ body, input, button {
     padding: 5%;
 }
 
+.btn-primary {
+    padding: 8px 20px !important;
+    text-transform: none !important;
+    color: white !important;
+    background: var(--color-background-button) !important;
+    border-radius: 15px !important;
+}
 
 

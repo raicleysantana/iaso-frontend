@@ -5,23 +5,22 @@ import {
     IconButton,
     Toolbar,
     Typography,
-    Button,
-    Container,
     Card,
     CardContent,
     Grid,
-    TextField,
     Checkbox,
     FormControlLabel,
     FormGroup,
     FormControl,
     FormLabel,
     InputLabel,
-    NativeSelect,
-    InputBase
+    MenuItem,
+    Select,
+    Button
 } from '@material-ui/core';
 
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import './style.css';
 
 function PreAtendimento() {
     return (<>
@@ -152,12 +151,20 @@ function PreAtendimento() {
                                     Selecione o SPA mais proximo:
                                 </legend>
                                 <br/>
-                                <select>
-                                    <option>Teste 1</option>
-                                    <option>Teste 2</option>
-                                    <option>Teste 3</option>
-                                    <option>Teste 4</option>
-                                </select>
+                                <FormControl className="" style={{width: '95%'}}>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value=""
+                                    >
+                                        <MenuItem value={10}>SPA Alvorada</MenuItem>
+                                        <MenuItem value={20}>SPA Adrianópolis</MenuItem>
+                                        <MenuItem value={30}>SPA Cidade Nova</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12} sm={12}>
+                                <Button className="btn-primary" style={{ float : 'right'}} variant="contained">Enviar</Button>
                             </Grid>
                         </Grid>
                     </CardContent>
