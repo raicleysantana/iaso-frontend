@@ -33,16 +33,24 @@
     border-radius: 15px !important;
 }
 
-.form-group{
+.form-group {
     width: 50%;
 }
 
-a.link-cadastro{
-    color : var(--color-text-green);
+a.link-cadastro {
+    color: var(--color-text-green);
+}
+
+.form-login {
+    width: 50%;
 }
 
 @media (max-width: 720px) {
-    .form-group{
+    .form-login {
+        width: 100%;
+    }
+
+    .form-group {
         width: 90%;
     }
 }
