@@ -17,6 +17,7 @@ import {makeStyles, useTheme, Theme, createStyles} from '@material-ui/core/style
 import SettingsIcon from '@material-ui/icons/Settings';
 import avatar from '../../assets/images/avatar.png';
 import Mapa from '../../assets/images/Mapa.png';
+import logo from '../../assets/images/logo.png';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import './style.css';
 
@@ -72,12 +73,11 @@ function Administrativo(props: Props) {
         <>
             <AppBar position="static" color='inherit' className="barra-menu">
                 <Toolbar variant="dense">
-                    <Link to="/">
-                        <IconButton edge="start" style={{color: 'var(--color-text-green)'}}>
-                            <ArrowBackIcon/>
-                        </IconButton>
-                    </Link>
-                    <div className="appbar-content">
+                    <img src={logo} style={{width: 45}}/>
+                    <span style={{color: 'var(--color-text-green)', fontWeight: 600}}>
+                        IASO - Sistema de Atendimento
+                    </span>
+                    <div className="appbar-content" style={{width: '60%'}}>
                         <Typography variant="h6" style={{color: 'var(--color-text-gray)'}}>
                             Fila virtual
                         </Typography>
@@ -165,7 +165,7 @@ function Administrativo(props: Props) {
                         </div>
                     </div>
                     <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                        <img src={Mapa} style={{width: '75%', marginTop : 15}}/>
+                        <img src={Mapa} style={{width: '75%', marginTop: 15}}/>
                     </div>
                 </main>
             </div>
@@ -204,6 +204,9 @@ const useStyles = makeStyles((theme: Theme) =>
         toolbar: theme.mixins.toolbar,
         drawerPaper: {
             width: drawerWidth,
+            position: 'relative',
+            marginTop: 10,
+            height: '100vh'
         },
         content: {
             flexGrow: 1,
