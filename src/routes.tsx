@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import CadastroUsuario from './pages/CadastroUsuario';
 import PreAtendimento from './pages/pre-atendimento';
-import Administrativo from "./pages/Administrativo";
+import Paciente from "./pages/paciente";
 
 function Routes() {
     return (
@@ -13,7 +13,7 @@ function Routes() {
             <Route path="/login" component={Login}/>
             <Route path="/cadastro-usuario" component={CadastroUsuario}/>
             <Route path="/pre-atendimento" component={PreAtendimento}/>
-            <Route path="/administrativo" component={Administrativo}/>
+            <Route path="/paciente" component={Paciente}/>
         </BrowserRouter>
     );
 }
