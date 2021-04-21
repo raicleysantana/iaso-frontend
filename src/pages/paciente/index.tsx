@@ -25,7 +25,6 @@ import Mapa from '../../assets/images/Mapa.png';
 import logo from '../../assets/images/logo.png';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import './style.css';
-import Test from './test';
 
 const drawerWidth = 280;
 
@@ -45,7 +44,7 @@ const routes = [
     {
         path: "/configuracao",
         sidebar: () => <div>shoelaces!</div>,
-        main: () => <Test/>
+        main: () => <h1>wd,wode</h1>,
     }
 ];
 
