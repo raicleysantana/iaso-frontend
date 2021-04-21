@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import {
     AppBar,
     Divider, Drawer, Grid, Hidden,
@@ -120,6 +120,7 @@ function Administrativo(props: Props) {
                 </nav>
 
                 <main className={classes.content}>
+
                     <div className={classes.toolbar}>
                         <div className="box-info">
                             <div className="box">
@@ -164,6 +165,7 @@ function Administrativo(props: Props) {
                             </div>
                         </div>
                     </div>
+
                     <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                         <img src={Mapa} style={{width: '75%', marginTop: 15}}/>
                     </div>
