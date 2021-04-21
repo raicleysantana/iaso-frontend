@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, {Suspense, lazy} from 'react';
 import {
     AppBar,
     Divider, Drawer, Grid, Hidden,
@@ -150,7 +150,7 @@ function Administrativo(props: Props) {
                             </Drawer>
                         </Hidden>
                     </nav>
-            </div>
+
                     <main className={classes.content}>
 
                         <Switch>
@@ -167,6 +167,7 @@ function Administrativo(props: Props) {
                         </Switch>
                     </main>
                 </div>
+
             </Router>
         </>
 
