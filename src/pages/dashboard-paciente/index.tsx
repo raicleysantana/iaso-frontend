@@ -25,13 +25,15 @@ import Mapa from '../../assets/images/Mapa.png';
 import logo from '../../assets/images/logo.png';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import './style.css';
+import SolicitaAtendimento from './pages/solicita-atendimento';
+import FilaVirtual from './pages/fila-virtual';
 
 const drawerWidth = 280;
 
 const routes = [
 
     {
-        path: "/",
+        path: "/dashboard-paciente",
         exact: true,
         sidebar: () => <div>home!</div>,
         main: () => <h2>Home</h2>
@@ -39,7 +41,12 @@ const routes = [
     {
         path: "/solicita_atendimento",
         sidebar: () => <div>bubblegum!</div>,
-        main: () => <h2>Bubblegum</h2>
+        main: () => <SolicitaAtendimento/>
+    },
+    {
+        path: "/fila-virtual",
+        sidebar: () => <div>Fila Virtual</div>,
+        main: () => <FilaVirtual/>
     },
     {
         path: "/configuracao",
@@ -78,6 +85,12 @@ function Administrativo(props: Props) {
                     <ListItem button>
                         <ListItemIcon style={{color: 'var(--color-text-green)'}}><AssignmentIcon/></ListItemIcon>
                         <ListItemText primary={'Solicitar Atendimento'}/>
+                    </ListItem>
+                </Link>
+                <Link to="/fila-virtual" className="link">
+                    <ListItem button>
+                        <ListItemIcon style={{color: 'var(--color-text-green)'}}><AssignmentIcon/></ListItemIcon>
+                        <ListItemText primary={'Fila Virtual'}/>
                     </ListItem>
                 </Link>
                 <Link to="/configuracao" className="link">
