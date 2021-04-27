@@ -57,7 +57,7 @@ function CadastroUsuario() {
     return (<>
         <AppBar position="static" color='inherit' className="barra-menu">
             <Toolbar variant="dense">
-                <Link to="/">
+                <Link to="/login">
                     <IconButton edge="start" style={{color: 'var(--color-text-green)'}}>
                         <ArrowBackIcon/>
                     </IconButton>
