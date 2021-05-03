@@ -1,47 +1,53 @@
-import React, {useEffect} from 'react';
-import {GoogleMap, useJsApiLoader} from '@react-google-maps/api'
-
-const containerStyle = {
-    width: '400px',
-    height: '400px'
-};
-
-const center = {
-    lat: -3.745,
-    lng: -38.523
-};
+import React, {useEffect, useRef, useState} from 'react';
+import ReactMapGl, {Marker} from 'react-map-gl';
+import icon_pin from '../../../../assets/images/map-pin.png';
 
 function FilaVirtual() {
-    const {isLoaded} = useJsApiLoader({
-        id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyDu0ROCcPCliXIkgRCeoGfMPf_bUDL8s-g"
+    const [lat, setLat] = useState(0);
+    const [lng, setLng] = useState(0);
+    const [viewport, setViewport] = useState({
+        latitude: -3.1316333,
+        longitude: -59.9825041,
+        zoom: 11,
+        width: '100%',
+        height: '90vh'
     });
 
-    const [map, setMap] = React.useState(null);
-
-    /*const onLoad = React.useCallback(function callback(map) {
-        const bounds = new window.google.maps.LatLngBounds();
-        map.fitBounds(bounds);
-        setMap(map)
-    }, []);*/
-
-    const onUnmount = React.useCallback(function callback(map) {
-        setMap(null)
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((localizacao) => {
+                const {latitude, longitude} = localizacao.coords;
+                // @ts-ignore
+                setLat(latitude);
+                // @ts-ignore
+                setLng(longitude);
+            },
+            (error) => {
+                alert(error);
+            }
+        );
     }, []);
 
-
     return (
-        <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={10}
-            //onLoad={onLoad}
-            //onUnmount={onUnmount}
-        >
-            { /* Child components, such as markers, info windows, etc. */}
-            <></>
-        </GoogleMap>
-    )
+        <div>
+            <ReactMapGl
+                {...viewport}
+                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                mapStyle={"mapbox://styles/mapbox/streets-v11"}
+                onViewportChange={(viewport: any) => {
+                    setViewport(viewport);
+                }}
+            >
+                {/*<Marker key={1} longitude={-59.942242702627134} latitude={-3.082773561139242}>
+                    <p>Minha casa</p>
+                </Marker>*/}
+                {/*-3.0830804 / -59.9423633 */}
+                <Marker longitude={lng} latitude={lat}>
+                    <img src={icon_pin} style={{width: 25}}/>
+                </Marker>
+
+            </ReactMapGl>
+        </div>
+    );
 }
 
 export default FilaVirtual;
