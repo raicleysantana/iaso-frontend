@@ -1,6 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 import ReactMapGl, {Marker} from 'react-map-gl';
-import icon_pin from '../../../../assets/images/map-pin.png';
+import icon_paciente from '../../../../assets/images/paciente.png';
+import icon_hospital from '../../../../assets/images/hospital.png';
+import {Grid} from "@material-ui/core";
+import '../../style.css';
 
 function FilaVirtual() {
     const [lat, setLat] = useState(0);
@@ -29,20 +32,67 @@ function FilaVirtual() {
 
     return (
         <div>
+
+            <div className="toolbar">
+                <div className="box-info">
+                    <div className="box">
+                        <Grid container spacing={3}>
+                            <Grid item xs={12} sm={6}>
+                                <p className="text-box">
+                                    Numero atual do atendimento:
+                                </p>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                         <span className="numero" style={{background: 'black'}}>
+                                    32
+                                </span>
+                            </Grid>
+                        </Grid>
+                    </div>
+                    <div className="box">
+                        <Grid container spacing={3}>
+                            <Grid item xs={12} sm={6}>
+                                <p className="text-box">
+                                    Seu numero de atendimento:
+                                </p>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                         <span className="numero" style={{background: 'green'}}>
+                                    45
+                                </span>
+                            </Grid>
+                        </Grid>
+                    </div>
+                    <div className="box">
+                        <Grid container spacing={3}>
+                            <Grid item xs={12} sm={6}>
+                                <p className="text-box">
+                                    Você chegará em:
+                                </p>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <span>20 minutos</span>
+                            </Grid>
+                        </Grid>
+                    </div>
+                </div>
+            </div>
+
+
             <ReactMapGl
                 {...viewport}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                 mapStyle={"mapbox://styles/mapbox/streets-v11"}
                 onViewportChange={(viewport: any) => {
                     setViewport(viewport);
-                }}
-            >
-                {/*<Marker key={1} longitude={-59.942242702627134} latitude={-3.082773561139242}>
-                    <p>Minha casa</p>
-                </Marker>*/}
-                {/*-3.0830804 / -59.9423633 */}
+                }}>
+
                 <Marker longitude={lng} latitude={lat}>
-                    <img src={icon_pin} style={{width: 25}}/>
+                    <img src={icon_paciente} style={{width: 25}}/>
+                </Marker>
+
+                <Marker longitude={-60.02062898256938} latitude={-3.1260561436116867}>
+                    <img src={icon_hospital} style={{width: 25}}/>
                 </Marker>
 
             </ReactMapGl>
