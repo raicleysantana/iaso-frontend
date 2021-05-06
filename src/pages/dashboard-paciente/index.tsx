@@ -27,6 +27,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import './style.css';
 import SolicitaAtendimento from './pages/solicita-atendimento';
 import FilaVirtual from './pages/fila-virtual';
+import Configuracao from './pages/configuracao';
 
 const drawerWidth = 280;
 
@@ -50,8 +51,8 @@ const routes = [
     },
     {
         path: "/configuracao",
-        sidebar: () => <div>shoelaces!</div>,
-        main: () => <h1>wd,wode</h1>,
+        sidebar: () => <div>Configuração</div>,
+        main: () => <Configuracao/>,
     }
 ];
 
