@@ -28,6 +28,7 @@ import './style.css';
 import SolicitaAtendimento from './pages/solicita-atendimento';
 import FilaVirtual from './pages/fila-virtual';
 import Configuracao from './pages/configuracao';
+import Relatorios from './pages/relatorios';
 
 const drawerWidth = 280;
 
@@ -40,17 +41,22 @@ const routes = [
         main: () => <h2>Home</h2>
     },
     {
-        path: "/solicita_atendimento",
+        path: "/dashboard-paciente/solicita_atendimento",
         sidebar: () => <div>bubblegum!</div>,
         main: () => <SolicitaAtendimento/>
     },
     {
-        path: "/fila-virtual",
+        path: "/dashboard-paciente/fila-virtual",
         sidebar: () => <div>Fila Virtual</div>,
         main: () => <FilaVirtual/>
     },
     {
-        path: "/configuracao",
+        path: "/dashboard-paciente/relatorios",
+        sidebar: () => <div>Relatórios</div>,
+        main: () => <Relatorios/>
+    },
+    {
+        path: "/dashboard-paciente/configuracao",
         sidebar: () => <div>Configuração</div>,
         main: () => <Configuracao/>,
     }
@@ -82,19 +88,25 @@ function Administrativo(props: Props) {
             </div>
             <Divider/>
             <List>
-                <Link to="/solicita_atendimento" className="link">
+                <Link to="/dashboard-paciente/solicita_atendimento" className="link">
                     <ListItem button>
                         <ListItemIcon style={{color: 'var(--color-text-green)'}}><AssignmentIcon/></ListItemIcon>
                         <ListItemText primary={'Solicitar Atendimento'}/>
                     </ListItem>
                 </Link>
-                <Link to="/fila-virtual" className="link">
+                <Link to="/dashboard-paciente/fila-virtual" className="link">
                     <ListItem button>
                         <ListItemIcon style={{color: 'var(--color-text-green)'}}><AssignmentIcon/></ListItemIcon>
                         <ListItemText primary={'Fila Virtual'}/>
                     </ListItem>
                 </Link>
-                <Link to="/configuracao" className="link">
+                <Link to="/dashboard-paciente/relatorios" className="link">
+                    <ListItem button>
+                        <ListItemIcon style={{color: 'var(--color-text-green)'}}><AssignmentIcon/></ListItemIcon>
+                        <ListItemText primary={'Relatórios'}/>
+                    </ListItem>
+                </Link>
+                <Link to="/dashboard-paciente/configuracao" className="link">
                     <ListItem button>
                         <ListItemIcon style={{color: 'var(--color-text-green)'}}><SettingsIcon/></ListItemIcon>
                         <ListItemText primary={'Configuração'}/>

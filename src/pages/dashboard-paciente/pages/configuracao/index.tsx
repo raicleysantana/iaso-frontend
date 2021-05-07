@@ -1,13 +1,17 @@
 import React from 'react';
-import {Card, CardActions, CardContent, Grid, Typography} from '@material-ui/core';
+import {Button, Card, CardActions, CardContent, Grid, Typography} from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import './style.css';
 
 function Configuracao() {
-    return (<div>
+    return (<div className="configuracao-content">
             <Card>
                 <CardContent>
                     <Typography className="" color="textSecondary" variant="h6" component="h6">
-                        Meu Perfil
+                        <b>Meu Perfil</b>
                     </Typography>
+                    <br/>
                     <div style={{marginLeft: 20}}>
                         <Grid container spacing={3}>
                             <Grid item xs={12} md={3}>
@@ -65,6 +69,14 @@ function Configuracao() {
                                 38
                             </Grid>
                         </Grid>
+                        <div>
+                            <Button className="btn-editar">
+                                <EditIcon/> Editar
+                            </Button>
+                            <Button className="btn-historico">
+                                <VisibilityIcon/> Visualizar Histórico
+                            </Button>
+                        </div>
                     </div>
                 </CardContent>
             </Card>
