@@ -1,0 +1,31 @@
+.line {
+    width: 100%;
+}
+
+.configuracao-content {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.MuiGrid-root:nth-child(1), .MuiGrid-root:nth-child(2) {
+    border: 0;
+}
+
+.MuiGrid-root {
+    border-top: 0.2px solid #ccc;
+    padding: 15px 5px;
+}
+
+.btn-editar {
+    background: #116ad7 !important;
+    color: #FFF !important;
+    text-transform: initial !important;
+}
+
+.btn-historico {
+    margin-left: 5px !important;
+    background: #3b93ff !important;
+    color: #FFF !important;
+    text-transform: initial !important;
+}

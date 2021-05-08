@@ -31,7 +31,7 @@ function getStepContent(step: number) {
 function CadastroUsuario() {
 
     const steps = getSteps();
-    const [activeStep, setActiveStep] = React.useState(1);
+    const [activeStep, setActiveStep] = React.useState(0);
     const [selectedDate, setSelectedDate] = React.useState<Date | null>(
         new Date('2014-08-18T21:11:54'),
     );
@@ -57,7 +57,7 @@ function CadastroUsuario() {
     return (<>
         <AppBar position="static" color='inherit' className="barra-menu">
             <Toolbar variant="dense">
-                <Link to="/">
+                <Link to="/login">
                     <IconButton edge="start" style={{color: 'var(--color-text-green)'}}>
                         <ArrowBackIcon/>
                     </IconButton>
@@ -80,6 +80,8 @@ function CadastroUsuario() {
                             </Step>
                         ))}
                     </Stepper>
+
+                    {activeStep == 0 &&
                     <Grid container spacing={3}>
 
                         <Grid item xs={12} md={12}>
@@ -151,15 +153,19 @@ function CadastroUsuario() {
                         </Grid>
 
                         <Grid item xs={12} md={6}>
-                            <FormControl component="fieldset" style={{ width : '100%'}}>
+                            <FormControl component="fieldset" style={{width: '100%'}}>
                                 <FormLabel component="legend">Sexo</FormLabel>
-                                <RadioGroup style={{ display : 'inline-block'}} aria-label="gender" name="gender1" value={sexo} onChange={handleChangeSexo}>
-                                    <FormControlLabel style={{ float : 'left', width : '45%'}} value="M" control={<Radio/>} label="Masculino"/>
-                                    <FormControlLabel style={{ float : 'left', width : '45%'}} value="F" control={<Radio/>} label="Feminino"/>
+                                <RadioGroup style={{display: 'inline-block'}} aria-label="gender" name="gender1"
+                                            value={sexo} onChange={handleChangeSexo}>
+                                    <FormControlLabel style={{float: 'left', width: '45%'}} value="M"
+                                                      control={<Radio/>}
+                                                      label="Masculino"/>
+                                    <FormControlLabel style={{float: 'left', width: '45%'}} value="F"
+                                                      control={<Radio/>}
+                                                      label="Feminino"/>
                                 </RadioGroup>
                             </FormControl>
                         </Grid>
-
 
                         <Grid item xs={12} md={6}>
                             <div className="form-group">
@@ -212,16 +218,142 @@ function CadastroUsuario() {
                             </div>
                         </Grid>
 
+                    </Grid>
+                    }
 
+                    {activeStep == 1 &&
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} md={12}>
+                            <div className="form-group">
+                                <TextField
+                                    id="form-email"
+                                    className="input"
+                                    label="E-mail"
+                                    style={{marginTop: 8, width: '100%'}}
+                                    margin="normal"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </div>
+                        </Grid>
+
+                        <Grid item xs={12} md={6}>
+                            <div className="form-group">
+                                <TextField
+                                    id="form-email"
+                                    className="input"
+                                    label="Senha"
+                                    style={{marginTop: 8, width: '100%'}}
+                                    margin="normal"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </div>
+                        </Grid>
+
+                        <Grid item xs={12} md={6}>
+                            <div className="form-group">
+                                <TextField
+                                    id="form-email"
+                                    className="input"
+                                    label="Confirmar Senha"
+                                    style={{marginTop: 8, width: '100%'}}
+                                    margin="normal"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </div>
+                        </Grid>
+
+                        <Grid item xs={12} md={6}>
+                            <div className="form-group">
+                                <TextField
+                                    id="form-email"
+                                    className="input"
+                                    label="Telefone"
+                                    style={{marginTop: 8, width: '100%'}}
+                                    margin="normal"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </div>
+                        </Grid>
+
+                        <Grid item xs={12} md={6}>
+                            <div className="form-group">
+                                <TextField
+                                    id="form-email"
+                                    className="input"
+                                    label="Cartão do SUS(Opcional)"
+                                    style={{marginTop: 8, width: '100%'}}
+                                    margin="normal"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </div>
+                        </Grid>
+                    </Grid>
+                    }
+
+                    {
+                        activeStep == 2 &&
+                        <div>
+                            <Typography variant="h6" style={{fontWeight: 'bold', textAlign: 'center'}}>
+                                Verificação de celular
+                            </Typography>
+                            <div className="verificacao-box">
+                                <div className="verificacao-content" style={{ flexDirection : 'row'}}>
+                                    <span className="verificacao-numero">8</span>
+                                    <span className="verificacao-numero">8</span>
+                                    <span className="verificacao-numero">7</span>
+                                    <span className="verificacao-numero">6</span>
+                                </div>
+                                <div className="">
+                                    <p style={{textAlign : 'center', fontSize : 14}}>codigo irá expirar em : 03:12</p>
+
+                                    <div style={{ marginTop : 20, marginBottom : 40}}>
+                                        <Button
+                                            style={{marginTop: 5, backgroundColor: '#1FCC79', color: '#FFF'}}
+                                            className="btn-verificacao">
+                                            Verificar
+                                        </Button>
+
+                                        <Button
+                                            style={{marginTop: 5, border: '1px solid #999'}}
+                                            className="btn-verificacao">
+                                            Reenviar código
+                                        </Button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                    <Grid container spacing={3}>
                         <Grid item xs={12} md={12}>
                             <div>
                                 <Button
-                                    style={{float: 'left'}}
+                                    style={{float: 'left', marginTop: 5}}
                                     disabled={activeStep === 0} onClick={handleBack} className="btn-primary">
                                     Voltar
                                 </Button>
                                 <Button
-                                    style={{float: 'right'}}
+                                    style={{float: 'right', marginTop: 5}}
                                     variant="contained"
                                     color="primary"
                                     onClick={handleNext}
@@ -232,7 +364,6 @@ function CadastroUsuario() {
                             </div>
                         </Grid>
                     </Grid>
-
                 </CardContent>
             </Card>
         </div>
