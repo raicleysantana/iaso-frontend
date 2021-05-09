@@ -97,7 +97,7 @@ function Login() {
                                 <div className="form-group"
                                      style={{marginTop: 20, display: 'flex', justifyContent: 'space-between'}}>
                                     <small>Esqueceu sua senha</small> <small>Você ainda não tem uma conta? {<Link
-                                    to="/cadastro" className="link-cadastro">Cadastre-se</Link>}</small>
+                                    to="/cadastro-usuario" className="link-cadastro">Cadastre-se</Link>}</small>
                                 </div>
                             </div>
                         </div>

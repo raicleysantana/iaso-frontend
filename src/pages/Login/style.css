@@ -45,6 +45,41 @@ a.link-cadastro {
     width: 50%;
 }
 
+.verificacao-box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.verificacao-content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 40%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.verificacao-numero {
+    padding: 10px 15px;
+    border: 1px solid #999;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 3px;
+    border-radius: 5px;
+}
+
+.btn-verificacao {
+    width: 100% !important;
+    padding: 8px 15px !important;
+    border-radius: 20px !important;
+    text-transform: none !important;
+}
+
 @media (max-width: 720px) {
     .form-login {
         width: 100%;
@@ -52,6 +87,10 @@ a.link-cadastro {
 
     .form-group {
         width: 90%;
+    }
+
+    .verificacao-content {
+        width: 100%;
     }
 }
 
