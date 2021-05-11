@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 import {DataGrid, GridColDef, GridValueFormatterParams, ptBR} from '@material-ui/data-grid';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import {Button} from "@material-ui/core";
@@ -7,7 +8,23 @@ import './style.css';
 import {ModalProvider, Modal, useModal, ModalTransition} from 'react-simple-hook-modal';
 import 'react-simple-hook-modal/dist/styles.css';
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        labelGray: {
+            color: "#999",
+            marginBottom: 5,
+        },
+        info: {
+            width: '100%',
+            marginTop: 5,
+            marginBottom: 5,
+        },
 
+        modal_footer: {
+            position: 'relative',
+        }
+    }),
+);
 
 const theme = createMuiTheme(
     {
@@ -19,6 +36,7 @@ const theme = createMuiTheme(
 );
 
 function App() {
+    const classes = useStyles();
 
     const rows = [
         {id: 1, dataConsulta: '20-05-2021', firstName: 'Jon', dataNascimento: 'dd/mm/yyyy', situacao: 'Compareceu'},
@@ -66,21 +84,68 @@ function App() {
 
     const ModalContent = () => (
         <>
-            <div>
-                <h5><b>Informações do paciente</b></h5>
-            </div>
-            <div>
-                <div style={{width: '40%'}}>
-                    <div><label>Nome:</label></div>
-                    <div>Fulano de Tal</div>
-                </div>
-                <div style={{width: '60%'}}>
+            <div style={{position: 'relative', minHeight: '55vh'}}>
 
+                <div style={{width: '40%', float: 'left'}}>
+                    <div>
+                        <h4>
+                            <b>Informações do paciente</b>
+                        </h4>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <div>
+                        <div className={classes.info}>
+                            <div><label className={classes.labelGray}>Nome:</label></div>
+                            <div>Fulano de Tal</div>
+                        </div>
+
+                        <div className={classes.info}>
+                            <div><label className={classes.labelGray}>Data de Nascimento:</label></div>
+                            <div>Fulano de Tal</div>
+                        </div>
+
+                        <div className={classes.info}>
+                            <div><label className={classes.labelGray}>Sexo:</label></div>
+                            <div>Fulano de Tal</div>
+                        </div>
+
+                        <div className={classes.info}>
+                            <div><label className={classes.labelGray}>Contato:</label></div>
+                            <div>Fulano de Tal</div>
+                        </div>
+
+                        <div className={classes.info}>
+                            <div><label className={classes.labelGray}>Caterira do SUS:</label></div>
+                            <div>Fulano de Tal</div>
+                        </div>
+                    </div>
+                </div>
+                <div style={{width: '60%', float: 'left'}}>
+                    <div>
+                        <h4>
+                            <b>Diagnostico do Paciente</b>
+                        </h4>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <div style={{width: '100%'}}>
+                        <p>
+                            O paciente relatou os seguintes sintomas, febre, dor de cabeça, perca de paladar.
+                            O paciente possui as seguintes condições de saúde, possui obesidade, glicose alta...
+                        </p>
+                    </div>
+                </div>
+                <div style={{width: '100%', float: 'left'}}>
+                    <div className={classes.modal_footer}>
+                        <Button
+                            style={{border: '1px solid #ccc', marginTop: 100}}
+                            onClick={() => closeModal()
+                            }>Voltar</Button>
+                    </div>
                 </div>
             </div>
-            <div className="modal-footer">
-                <button onClick={() => closeModal()}>Voltar</button>
-            </div>
+
 
         </>
     );
