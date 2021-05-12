@@ -4,3 +4,30 @@
     color: #FFF !important;
     text-transform: initial !important;
 }
+
+.linha {
+    width: 100%;
+    border-top: 2px solid #cccccc;
+    margin: 10px 0;
+}
+
+.contentInput {
+    float: left;
+    width: 50%;
+}
+
+#pesquisar{
+    background-image: url('../../../../assets/images/searchicon.png');
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    border-radius: 10px;
+}
+
+#pesquisar:focus{
+    border-radius: 10px;
+}
