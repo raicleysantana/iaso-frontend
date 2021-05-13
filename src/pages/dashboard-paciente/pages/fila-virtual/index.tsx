@@ -28,6 +28,8 @@ function FilaVirtual() {
                 alert(error);
             }
         );
+
+        console.log(lat, lng);
     }, []);
 
     return (

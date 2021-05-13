@@ -16,7 +16,11 @@
     width: 50%;
 }
 
-#pesquisar{
+.contentButton {
+    text-transform: initial !important;
+}
+
+#pesquisar {
     background-image: url('../../../../assets/images/searchicon.png');
     background-position: 10px 12px;
     background-repeat: no-repeat;
@@ -28,6 +32,13 @@
     border-radius: 10px;
 }
 
-#pesquisar:focus{
+#pesquisar:focus {
     border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .contentInput {
+        float: left;
+        width: 100%;
+    }
 }

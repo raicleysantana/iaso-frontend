@@ -29,3 +29,10 @@
     color: #FFF !important;
     text-transform: initial !important;
 }
+
+.linha {
+    width: 100%;
+    border-top: 2px solid #cccccc;
+    margin: 10px 0;
+}
+
