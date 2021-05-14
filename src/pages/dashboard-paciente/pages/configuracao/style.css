@@ -36,3 +36,6 @@
     margin: 10px 0;
 }
 
+#modal-confirm {
+    height: 300px !important;
+}

@@ -1,9 +1,17 @@
 import React from 'react';
-import {Button, Card, CardActions, CardContent, Grid, TextField, Typography} from '@material-ui/core';
+import {Button, Card, CardContent, Grid, TextField, Typography} from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import './style.css';
-import {ModalProvider, Modal, useModal, ModalTransition} from 'react-simple-hook-modal';
+import iconAlert from '../../../../assets/images/alerta.png';
+import {
+    Modal as Modal1,
+    Modal as Modal2,
+    ModalProvider,
+    ModalTransition,
+    useModal as useModalForm,
+    useModal as useModalConfirm
+} from 'react-simple-hook-modal';
 import {makeStyles} from "@material-ui/core/styles";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SaveIcon from '@material-ui/icons/Save';
@@ -22,12 +30,18 @@ const useStyles = makeStyles(theme => ({
     btn: {
         color: '#FFF',
         textTransform: 'initial'
+    },
+    modal_confirm: {
+        height: 100,
+        minHeight: '50% !important',
     }
 }));
 
 function Configuracao() {
     const classes = useStyles();
-    const {isModalOpen, openModal, closeModal} = useModal();
+    //const {isModalOpen, openModal, closeModal} = useModal();
+    const modalForm = useModalForm();
+    const modalConfirm = useModalConfirm();
 
     return (
         <div className="configuracao-content">
@@ -96,7 +110,7 @@ function Configuracao() {
                                 </Grid>
                             </Grid>
                             <div>
-                                <Button className="btn-editar" onClick={openModal}>
+                                <Button className="btn-editar" onClick={modalForm.openModal}>
                                     <EditIcon/> Editar
                                 </Button>
                                 <Button className="btn-historico">
@@ -108,9 +122,9 @@ function Configuracao() {
                 </Card>
 
 
-                <Modal
-                    id="any-unique-identifier"
-                    isOpen={isModalOpen}
+                <Modal1
+                    id="modal-1"
+                    isOpen={modalForm.isModalOpen}
                     transition={ModalTransition.NONE}
                 >
 
@@ -274,14 +288,14 @@ function Configuracao() {
 
                             <Grid item md={12}>
                                 <Button style={{border: '1px solid', color: '#4F5256', marginRight: 5}}
-                                        onClick={closeModal}
+                                        onClick={modalForm.closeModal}
                                         className={classes.btn}
                                 >
                                     <ArrowBackIcon/> Voltar
                                 </Button>
                                 <Button
                                     style={{backgroundColor: '#4CAF50'}}
-                                    onClick={closeModal}
+                                    onClick={modalConfirm.openModal}
                                     className={classes.btn}
                                 >
                                     <SaveIcon/> Salvar
@@ -291,8 +305,54 @@ function Configuracao() {
 
                     </>
 
-                </Modal>
+                </Modal1>
+
+                <Modal2
+                    id="modal-2"
+                    modalClassName={classes.modal_confirm}
+                    isOpen={modalConfirm.isModalOpen}
+                    transition={ModalTransition.SCALE}
+                >
+                    <>
+                        <div style={{
+                            width: '100%',
+                            height: '90%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexDirection: 'column'
+                        }}>
+
+                            <div>
+                                <img src={iconAlert} style={{width: 65}}/>
+                            </div>
+                            <div style={{margin: '10px 0'}}>
+                                <h2>Voce tem certeza?</h2>
+                            </div>
+                            <div>
+                                <p>Você tem certeza que deseja alterar seus dados?</p>
+                            </div>
+                        </div>
+                        <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                            <Button
+                                onClick={modalConfirm.closeModal}
+                                className={classes.btn}
+                                style={{backgroundColor: '#EFEFEF', marginRight: 5, color: '#555555'}}
+                            >
+                                Cancelar
+                            </Button>
+                            <Button
+                                className={classes.btn}
+                                style={{backgroundColor: '#F44336'}}
+                            >
+                                Sim, Alterar!
+                            </Button>
+                        </div>
+                    </>
+                </Modal2>
             </ModalProvider>
+
+
         </div>
     );
 }
