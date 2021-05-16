@@ -1,0 +1,35 @@
+@media (min-width: 600px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+.cards {
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 10px;
+    /*padding: 5%;*/
+}
+
+.card-info {
+    background-color: white;
+    width: 19rem;
+    color: white;
+    height: auto;
+}
+
+.card-lista {
+    background-color: white;
+    color: white;
+    width: 53rem;
+    height: auto;
+}
+
+.modal{
+    width: 620px;
+    min-height: 200px;
+}
+
+.linha {
+    width: 100%;
+    border-top: 1px solid #cccccc;
+    margin: 10px 0;
+}

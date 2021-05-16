@@ -22,38 +22,21 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import avatar from '../../assets/images/avatar.png';
 import logo from '../../assets/images/logo.png';
 import './style.css';
-import SolicitaAtendimento from './pages/solicita-atendimento';
-import FilaVirtual from './pages/fila-virtual';
+import ChecagemPaciente from './pages/checagem-paciente';
 import Configuracao from './pages/configuracao';
-import Relatorios from './pages/relatorios';
 
 const drawerWidth = 280;
 
 const routes = [
+    {
+        path: "/dashboard-atendimento/checagem-paciente",
+        exact: true,
+        sidebar: () => <div>Checagem de Paciente!</div>,
+        main: () => <ChecagemPaciente/>
+    },
 
     {
-        path: "/dashboard-paciente",
-        exact: true,
-        sidebar: () => <div>home!</div>,
-        main: () => <h2>Home</h2>
-    },
-    {
-        path: "/dashboard-paciente/solicita_atendimento",
-        sidebar: () => <div>Solicita Atendimento!</div>,
-        main: () => <SolicitaAtendimento/>
-    },
-    {
-        path: "/dashboard-paciente/fila-virtual",
-        sidebar: () => <div>Fila Virtual</div>,
-        main: () => <FilaVirtual/>
-    },
-    {
-        path: "/dashboard-paciente/relatorios",
-        sidebar: () => <div>Relatórios</div>,
-        main: () => <Relatorios/>
-    },
-    {
-        path: "/dashboard-paciente/configuracao",
+        path: "/dashboard-atendimento/configuracao",
         sidebar: () => <div>Configuração</div>,
         main: () => <Configuracao/>,
     }
@@ -85,31 +68,14 @@ function Administrativo(props: Props) {
             </div>
             <Divider/>
             <List>
-                <Link to="/dashboard-paciente/solicita_atendimento" className="link">
-                    <ListItem button>
-                        <ListItemIcon style={{color: 'var(--color-text-green)'}}><AssignmentIcon/></ListItemIcon>
-                        <ListItemText primary={'Solicitar Atendimento'}/>
-                    </ListItem>
-                </Link>
                 <Link to="/dashboard-atendimento/checagem-paciente" className="link">
                     <ListItem button>
                         <ListItemIcon style={{color: 'var(--color-text-green)'}}><AssignmentIcon/></ListItemIcon>
                         <ListItemText primary={'Checagem Paciente'}/>
                     </ListItem>
                 </Link>
-                <Link to="/dashboard-paciente/fila-virtual" className="link">
-                    <ListItem button>
-                        <ListItemIcon style={{color: 'var(--color-text-green)'}}><AssignmentIcon/></ListItemIcon>
-                        <ListItemText primary={'Fila Virtual'}/>
-                    </ListItem>
-                </Link>
-                <Link to="/dashboard-paciente/relatorios" className="link">
-                    <ListItem button>
-                        <ListItemIcon style={{color: 'var(--color-text-green)'}}><AssignmentIcon/></ListItemIcon>
-                        <ListItemText primary={'Relatórios'}/>
-                    </ListItem>
-                </Link>
-                <Link to="/dashboard-paciente/configuracao" className="link">
+
+                <Link to="/dashboard-atendimento/configuracao" className="link">
                     <ListItem button>
                         <ListItemIcon style={{color: 'var(--color-text-green)'}}><SettingsIcon/></ListItemIcon>
                         <ListItemText primary={'Configuração'}/>
