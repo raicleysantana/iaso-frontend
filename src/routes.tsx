@@ -6,6 +6,7 @@ import CadastroUsuario from './pages/CadastroUsuario';
 import PreAtendimento from './pages/pre-atendimento';
 import DashboardPaciente from "./pages/dashboard-paciente";
 import DashboardAtendimento from "./pages/dashboard-atendimento";
+import DashboardRelatorios from "./pages/dashboard-relatorios";
 
 function Routes() {
     return (
@@ -16,6 +17,7 @@ function Routes() {
             <Route path="/pre-atendimento" component={PreAtendimento}/>
             <Route path="/dashboard-paciente" component={DashboardPaciente}/>
             <Route path="/dashboard-atendimento" component={DashboardAtendimento}/>
+            <Route path="/dashboard-relatorios" component={DashboardRelatorios}/>
         </BrowserRouter>
     );
 }

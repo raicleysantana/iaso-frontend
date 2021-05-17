@@ -1,0 +1,55 @@
+.MuiGrid-root {
+    border-top: none !important;
+}
+
+.header {
+    background: white;
+    padding: 20px;
+    width: 100%;
+}
+
+.header h5 {
+    color: #999999;
+    font-weight: 400;
+}
+
+.quadro {
+    width: 100%;
+    height: auto;
+    min-height: 75px;
+    background: #FFFFFF;
+    padding: 10px 15px;
+}
+
+.quadro h6, .quadro small {
+    color: #999999;
+}
+
+.quadro small {
+    margin-left: 5%;
+}
+
+.informacoes-box {
+    background: #FFFFFF;
+    padding: 15px;
+    width: 100%;
+    min-height: 350px;
+}
+
+.informacoes-box ul li {
+    list-style: none;
+    font-size: 13px;
+    color: #4F5256;
+    margin: 5px 0;
+}
+
+.informacoes-box ul li .circle {
+    margin: 2px 2px 2px 0;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #999999;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    float: left;
+}
