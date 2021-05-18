@@ -1,7 +1,8 @@
 import React from 'react';
 import './style.css';
-import {Grid, Typography} from "@material-ui/core";
+import {Grid, Typography, Box} from "@material-ui/core";
 import {makeStyles, createStyles, Theme} from '@material-ui/core/styles';
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell,} from "recharts";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -17,6 +18,20 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
+
+const barColors = ["", "", "#52B156", "#03A9F4", "#AB47BC", "#FF0000", "", "" ];
+
+const GraficoAreas = [
+    { name: "", },
+    { name: "", },
+    { id: "Casos Suspeitos", name: "", pv: 150 },
+    { id: "Casos em observação", name: "", pv: 20 },
+    { id: "Casos não suspeitos", name: "", pv: 10 },
+    { id: "Casos confirmados", name: "", pv: 890 },
+    { name: "", },
+    { name: "", }
+];
+
 
 function Dashboard() {
 
@@ -155,7 +170,36 @@ function Dashboard() {
                                     Pacientes com covid-19
                                 </li>
                             </ul>
-
+                            <Box
+                                style={{
+                                    height: 300,
+                                    position: 'relative'
+                                }}
+                            >
+                                <BarChart
+                                    width={600}
+                                    height={300}
+                                    data={GraficoAreas}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis/>
+                                    <Tooltip />
+                                    <Bar
+                                        dataKey="pv"
+                                        fill="#00a0fc"
+                                        stroke="#000000"
+                                        strokeWidth={1}
+                                    >
+                                        {
+                                            GraficoAreas.map((entry, index) => (
+                                                <Cell key={`cell-${index}`} fill={barColors[index % 20]} />
+                                            ))
+                                        }
+                                    </Bar>
+                                </BarChart>
+                            </Box>
                         </div>
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -185,6 +229,7 @@ function Dashboard() {
                                 </li>
                             </ul>
                         </div>
+
                     </Grid>
 
                 </Grid>
