@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import {Grid, Typography, Box} from "@material-ui/core";
 import {makeStyles, createStyles, Theme} from '@material-ui/core/styles';
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell,} from "recharts";
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell,} from "recharts";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
