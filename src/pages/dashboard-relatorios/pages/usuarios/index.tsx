@@ -2,11 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { DataGrid, GridColDef, GridValueFormatterParams, ptBR } from '@material-ui/data-grid';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { Button, FormControl, InputLabel, MenuItem, Select, Grid, TextField, withStyles, InputBase, } from "@material-ui/core";
+import clsx from 'clsx';
+import { Button, FormControl, InputLabel, MenuItem, Select, Grid, TextField, withStyles, InputBase, InputAdornment } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import CheckIcon from '@material-ui/icons/Check';
+import DeleteIcon from '@material-ui/icons/Delete';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SaveIcon from '@material-ui/icons/Save';
+import EditIcon from '@material-ui/icons/Edit';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import IconButton from '@material-ui/core/IconButton';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 import './style.css';
 import 'react-simple-hook-modal/dist/styles.css';
 import {
@@ -56,7 +64,10 @@ const useStyles = makeStyles((theme: Theme) =>
         modal_confirm: {
             height: 100,
             minHeight: '50% !important',
-        }
+        },
+        margin: {
+            margin: theme.spacing(1),
+        },
     }),
 );
 
@@ -69,11 +80,22 @@ const theme = createMuiTheme(
     ptBR,
 );
 
+interface State {
+    amount: string;
+    password: string;
+    weight: string;
+    weightRange: string;
+    showPassword: boolean;
+}
+
 function App() {
     const classes = useStyles();
     //const {isModalOpen, openModal, closeModal} = useModal();
     const modalForm1 = useModalForm();
     const modalForm2 = useModalForm();
+    const modalForm3 = useModalForm();
+    const modalForm4 = useModalForm();
+    const modalForm5 = useModalForm();
     const modalConfirm = useModalConfirm();
 
     const [age, setAge] = React.useState('');
@@ -83,8 +105,28 @@ function App() {
         name: 'hai',
     });
 
+    const [values, setValues] = React.useState<State>({
+        amount: '',
+        password: '',
+        weight: '',
+        weightRange: '',
+        showPassword: false,
+    });
+
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         setAge(event.target.value as string);
+    };
+
+    const handleChangePassword = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
+    const handleClickShowPassword = () => {
+        setValues({ ...values, showPassword: !values.showPassword });
+    };
+
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
     };
 
     const rows = [
@@ -231,67 +273,113 @@ function App() {
                 isOpen={modalForm1.isModalOpen}
                 transition={ModalTransition.NONE}
             >
-                <div style={{ position: 'relative', minHeight: '55vh' }}>
-
-                    <div style={{ width: '40%', float: 'left' }}>
-                        <div>
-                            <h4>
-                                <b>Informações do paciente</b>
-                            </h4>
-                        </div>
-                        <br />
-                        <hr />
-                        <div>
-                            <div className={classes.info}>
-                                <div><label className={classes.labelGray}>Nome:</label></div>
-                                <div>Fulano de Tal</div>
-                            </div>
-
-                            <div className={classes.info}>
-                                <div><label className={classes.labelGray}>Data de Nascimento:</label></div>
-                                <div>Fulano de Tal</div>
-                            </div>
-
-                            <div className={classes.info}>
-                                <div><label className={classes.labelGray}>Sexo:</label></div>
-                                <div>Fulano de Tal</div>
-                            </div>
-
-                            <div className={classes.info}>
-                                <div><label className={classes.labelGray}>Contato:</label></div>
-                                <div>Fulano de Tal</div>
-                            </div>
-
-                            <div className={classes.info}>
-                                <div><label className={classes.labelGray}>Caterira do SUS:</label></div>
-                                <div>Fulano de Tal</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style={{ width: '60%', float: 'left' }}>
-                        <div>
-                            <h4>
-                                <b>Diagnostico do Paciente</b>
-                            </h4>
-                        </div>
-                        <br />
-                        <hr />
-                        <div style={{ width: '100%' }}>
-                            <p>
-                                O paciente relatou os seguintes sintomas, febre, dor de cabeça, perca de paladar.
-                                O paciente possui as seguintes condições de saúde, possui obesidade, glicose alta...
-                        </p>
-                        </div>
-                    </div>
-                    <div style={{ width: '100%', float: 'left' }}>
-                        <div className={classes.modal_footer}>
-                            <Button
-                                style={{ border: '1px solid #ccc', marginTop: 100 }}
-                                onClick={modalForm1.closeModal}
-                            >Voltar</Button>
-                        </div>
-                    </div>
+                <div>
+                    <p style={{ fontSize: 25 }} >Visualizar</p>
+                    <hr className="linha" />
+                    <h3>Perfil do Usuário</h3>
                 </div>
+
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={3} className={classes.label}>
+                        Nome
+                            </Grid>
+                    <Grid item xs={12} md={9}>
+                        Nicholas Ng
+                        </Grid>
+
+                    <Grid item xs={12} md={3} className={classes.label}>
+                        Email
+                            </Grid>
+                    <Grid item xs={12} md={9}>
+                        nich@virtualspirit.me
+                        </Grid>
+
+                    <Grid item xs={12} md={3} className={classes.label}>
+                        Tipo de Usuário
+                            </Grid>
+                    <Grid item xs={12} md={9}>
+                        Recepção
+                        </Grid>
+
+                    <Grid item xs={12} md={3} className={classes.label}>
+                        RG
+                            </Grid>
+                    <Grid item xs={12} md={9}>
+                        00000000-0
+                        </Grid>
+
+                    <Grid item xs={12} md={3} className={classes.label}>
+                        CPF
+                            </Grid>
+                    <Grid item xs={12} md={9}>
+                        000.000.000-00
+                        </Grid>
+
+                    <Grid item xs={12} md={3} className={classes.label}>
+                        Contato
+                            </Grid>
+                    <Grid item xs={12} md={9}>
+                        (00) 00000-0000
+                        </Grid>
+
+                    <Grid item xs={12} md={3} className={classes.label}>
+                        Data de Nascimento
+                            </Grid>
+                    <Grid item xs={12} md={9}>
+                        dd/mm/aaaa
+                        </Grid>
+
+                    <Grid item xs={12} md={3} className={classes.label}>
+                        CEP
+                            </Grid>
+                    <Grid item xs={12} md={9}>
+                        00000-000
+                        </Grid>
+
+                    <Grid item xs={12} md={3} className={classes.label}>
+                        Endereço
+                            </Grid>
+                    <Grid item xs={12} md={9}>
+                        Rua Sei lá
+                        </Grid>
+
+                    <Grid item xs={12} md={3} className={classes.label}>
+                        Nº
+                            </Grid>
+                    <Grid item xs={12} md={9}>
+                        38
+                        </Grid>
+
+                    <Grid item md={12}>
+                        <Button style={{ border: '1px solid', color: '#4F5256', marginRight: 5 }}
+                            onClick={modalForm2.closeModal}
+                            className={classes.btn}
+                        >
+                            <ArrowBackIcon style={{ marginRight: 10 }} /> Voltar
+                                </Button>
+                        <Button
+                            style={{ backgroundColor: '#4CAF50', marginRight: 5 }}
+                            onClick={modalForm2.openModal}
+                            className={classes.btn}
+                        >
+                            <EditIcon style={{ marginRight: 10 }} /> Editar
+                                </Button>
+                        <Button
+                            style={{ backgroundColor: '#4CAF50', marginRight: 5 }}
+                            onClick={modalConfirm.openModal}
+                            className={classes.btn}
+                        >
+                            <VisibilityIcon style={{ marginRight: 10 }} /> Visualizar Histórico
+                                </Button>
+                        <Button
+                            style={{ backgroundColor: '#4CAF50' }}
+                            onClick={modalConfirm.openModal}
+                            className={classes.btn}
+                        >
+                            <DeleteIcon style={{ marginRight: 10 }} /> Deletar
+                                </Button>
+                    </Grid>
+                </Grid>
             </Modal1>
 
             <Modal2
@@ -301,8 +389,243 @@ function App() {
             >
                 <>
                     <div>
-                        <p style={{fontSize: 25}} >Criar</p>
-                        <hr className="linha"/>
+                        <p style={{ fontSize: 25 }} >Editar</p>
+                        <hr className="linha" />
+                        <h3>Perfil do Usuário</h3>
+                    </div>
+
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} md={3} className={classes.label}>
+                            Nome
+                            </Grid>
+                        <Grid item xs={12} md={9}>
+                            <TextField
+                                id=""
+                                label=""
+                                variant="outlined"
+                                size="small"
+                                InputLabelProps={{ shrink: false }}
+                                className={classes.textField}
+                                placeholder="Nicolas Ng"
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} md={3} className={classes.label}>
+                            Tipo de Usuário
+                            </Grid>
+                        <Grid item xs={12} md={9}>
+                            <TextField
+                                id=""
+                                label=""
+                                variant="outlined"
+                                size="small"
+                                InputLabelProps={{ shrink: false }}
+                                className={classes.textField}
+                                placeholder="Recepção"
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} md={3} className={classes.label}>
+                            Email
+                            </Grid>
+                        <Grid item xs={12} md={9}>
+                            <TextField
+                                id=""
+                                label=""
+                                variant="outlined"
+                                size="small"
+                                InputLabelProps={{ shrink: false }}
+                                className={classes.textField}
+                                placeholder="nich@virtualspirit.me"
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} md={3} className={classes.label}>
+                            RG
+                            </Grid>
+                        <Grid item xs={12} md={9}>
+                            <TextField
+                                id=""
+                                label=""
+                                variant="outlined"
+                                size="small"
+                                InputLabelProps={{ shrink: false }}
+                                className={classes.textField}
+                                placeholder="0000000-00"
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} md={3} className={classes.label}>
+                            CPF
+                            </Grid>
+                        <Grid item xs={12} md={9}>
+                            <TextField
+                                id=""
+                                label=""
+                                variant="outlined"
+                                size="small"
+                                InputLabelProps={{ shrink: false }}
+                                className={classes.textField}
+                                placeholder="000.000.000-00"
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} md={3} className={classes.label}>
+                            Contato
+                            </Grid>
+                        <Grid item xs={12} md={9}>
+                            <TextField
+                                id=""
+                                label=""
+                                variant="outlined"
+                                size="small"
+                                InputLabelProps={{ shrink: false }}
+                                className={classes.textField}
+                                placeholder="(00) 00000-0000"
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} md={3} className={classes.label}>
+                            Data de Nascimento
+                            </Grid>
+                        <Grid item xs={12} md={9}>
+                            <TextField
+                                id=""
+                                label=""
+                                variant="outlined"
+                                size="small"
+                                InputLabelProps={{ shrink: false }}
+                                className={classes.textField}
+                                placeholder="dd/mm/aaaa"
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} md={3} className={classes.label}>
+                            CEP
+                            </Grid>
+                        <Grid item xs={12} md={9}>
+                            <TextField
+                                id=""
+                                label=""
+                                variant="outlined"
+                                size="small"
+                                InputLabelProps={{ shrink: false }}
+                                className={classes.textField}
+                                placeholder="000000-000"
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} md={3} className={classes.label}>
+                            Endereço
+                            </Grid>
+                        <Grid item xs={12} md={9}>
+                            <TextField
+                                id=""
+                                label=""
+                                variant="outlined"
+                                size="small"
+                                InputLabelProps={{ shrink: false }}
+                                className={classes.textField}
+                                placeholder="Rua Sei lá"
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} md={3} className={classes.label}>
+                            Nº
+                            </Grid>
+                        <Grid item xs={12} md={9}>
+                            <TextField
+                                id=""
+                                label=""
+                                variant="outlined"
+                                size="small"
+                                InputLabelProps={{ shrink: false }}
+                                className={classes.textField}
+                                placeholder="38"
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} md={3} className={classes.label}>
+                            Senha
+                            </Grid>
+                        <Grid item xs={4} md={3}>
+                            <FormControl className={classes.textField} variant="outlined" size="small">
+                                <OutlinedInput
+                                    id="outlined-adornment-password"
+                                    type={values.showPassword ? 'text' : 'password'}
+                                    value={values.password}
+                                    onChange={handleChangePassword('password')}
+                                    placeholder="***************"
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
+                        </Grid>
+
+                        <Grid item xs={12} md={3} className={classes.label}>
+                            Confirmar Senha
+                            </Grid>
+                        <Grid item xs={4} md={3}>
+                            <FormControl className={classes.textField} variant="outlined" size="small">
+                                <OutlinedInput
+                                    id="outlined-adornment-password"
+                                    type={values.showPassword ? 'text' : 'password'}
+                                    value={values.password}
+                                    onChange={handleChangePassword('password')}
+                                    placeholder="***************"
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
+                        </Grid>
+
+                        <Grid item md={12}>
+                            <Button style={{ border: '1px solid', color: '#4F5256', marginRight: 5 }}
+                                onClick={modalForm2.closeModal}
+                                className={classes.btn}
+                            >
+                                <ArrowBackIcon style={{ marginRight: 10 }} /> Voltar
+                                </Button>
+                            <Button
+                                style={{ backgroundColor: '#4CAF50' }}
+                                onClick={modalConfirm.openModal}
+                                className={classes.btn}
+                            >
+                                <SaveIcon style={{ marginRight: 10 }} /> Confirmar
+                                </Button>
+                        </Grid>
+                    </Grid>
+                </>
+            </Modal2>
+
+
+            <Modal1
+                id="modal-3"
+                isOpen={modalForm3.isModalOpen}
+                transition={ModalTransition.NONE}
+            >
+                <>
+                    <div>
+                        <p style={{ fontSize: 25 }} >Criar</p>
+                        <hr className="linha" />
                         <h3>Novo Usuário</h3>
                     </div>
 
@@ -492,42 +815,42 @@ function App() {
                         </Grid>
                     </Grid>
                 </>
-            </Modal2>
+            </Modal1>
 
             <Modal2
-                    id="modal-3"
-                    modalClassName={classes.modal_confirm}
-                    isOpen={modalConfirm.isModalOpen}
-                    transition={ModalTransition.SCALE}
-                >
-                    <>
-                        <div style={{
-                            width: '100%',
-                            height: '90%',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flexDirection: 'column'
-                        }}>
+                id="modal-4"
+                modalClassName={classes.modal_confirm}
+                isOpen={modalConfirm.isModalOpen}
+                transition={ModalTransition.SCALE}
+            >
+                <>
+                    <div style={{
+                        width: '100%',
+                        height: '90%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'column'
+                    }}>
 
-                            <div>
-                                <img src={iconAlert} style={{width: 65}}/>
-                            </div>
-                            <div style={{margin: '10px 0'}}>
-                                <h2>Usuário criado com sucesso!</h2>
-                            </div>
+                        <div>
+                            <img src={iconAlert} style={{ width: 65 }} />
                         </div>
-                        <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                            <Button
-                                className={classes.btn}
-                                style={{backgroundColor: '#F44336'}}
-                                onClick={modalConfirm.closeModal}
-                            >
-                                Ok
+                        <div style={{ margin: '10px 0' }}>
+                            <h2>Usuário criado com sucesso!</h2>
+                        </div>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <Button
+                            className={classes.btn}
+                            style={{ backgroundColor: '#F44336' }}
+                            onClick={modalConfirm.closeModal}
+                        >
+                            Ok
                             </Button>
-                        </div>
-                    </>
-                </Modal2>
+                    </div>
+                </>
+            </Modal2>
         </ModalProvider>
     );
 }
