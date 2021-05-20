@@ -91,12 +91,6 @@ function Administrativo(props: Props) {
                         <ListItemText primary={'Solicitar Atendimento'}/>
                     </ListItem>
                 </Link>
-                <Link to="/dashboard-atendimento/checagem-paciente" className="link">
-                    <ListItem button>
-                        <ListItemIcon style={{color: 'var(--color-text-green)'}}><AssignmentIcon/></ListItemIcon>
-                        <ListItemText primary={'Checagem Paciente'}/>
-                    </ListItem>
-                </Link>
                 <Link to="/dashboard-paciente/fila-virtual" className="link">
                     <ListItem button>
                         <ListItemIcon style={{color: 'var(--color-text-green)'}}><AssignmentIcon/></ListItemIcon>
