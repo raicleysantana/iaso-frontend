@@ -228,6 +228,7 @@ function Dashboard() {
                                     Pacientes com covid-19
                                 </li>
                             </ul>
+                            
                         </div>
 
                     </Grid>
