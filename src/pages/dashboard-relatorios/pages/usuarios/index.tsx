@@ -5,7 +5,6 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { Button, FormControl, InputLabel, MenuItem, Select, Grid, TextField, withStyles, InputBase, InputAdornment } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
-import CheckIcon from '@material-ui/icons/Check';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SaveIcon from '@material-ui/icons/Save';
@@ -18,14 +17,18 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import './style.css';
 import 'react-simple-hook-modal/dist/styles.css';
 import {
-    Modal as Modal1,
-    Modal as Modal2,
+    Modal as ModalConfirm,
+    Modal as ModalDelete,
+    Modal as ModalVisualizar,
+    Modal as ModalEditar,
+    Modal as ModalCriar,
     ModalProvider,
     ModalTransition,
     useModal as useModalForm,
-    useModal as useModalConfirm
+    useModal as useModalConfirm,
 } from 'react-simple-hook-modal';
 import iconAlert from '../../../../assets/images/alerta.png';
+import iconAlertSucess from '../../../../assets/images/alerta-sucess.png';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -91,12 +94,13 @@ interface State {
 function App() {
     const classes = useStyles();
     //const {isModalOpen, openModal, closeModal} = useModal();
-    const modalForm1 = useModalForm();
-    const modalForm2 = useModalForm();
+    const modalFormVisualizar = useModalForm();
+    const modalFormEditar = useModalForm();
+    const modalFormCriar = useModalForm();
     const modalForm3 = useModalForm();
-    const modalForm4 = useModalForm();
-    const modalForm5 = useModalForm();
-    const modalConfirm = useModalConfirm();
+    const modalConfirmCriar = useModalConfirm();
+    const modalConfirmEditar = useModalConfirm();
+    const modalConfirmDeletar = useModalConfirm();
 
     const [age, setAge] = React.useState('');
 
@@ -214,8 +218,8 @@ function App() {
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                             >
-                                <MenuItem value={""} onClick={modalForm1.openModal}>Visualizar</MenuItem>
-                                <MenuItem value={""}>Deletar</MenuItem>
+                                <MenuItem value={""} onClick={modalFormVisualizar.openModal}>Visualizar</MenuItem>
+                                <MenuItem value={""} onClick={modalConfirmDeletar.openModal}>Deletar</MenuItem>
                             </Select>
                         </FormControl>
                     </>
@@ -247,7 +251,7 @@ function App() {
                             <Button
                                 className="contentButton"
                                 style={{ backgroundColor: '#4CAF50', color: '#FFF' }}
-                                onClick={modalForm2.openModal}>
+                                onClick={modalFormCriar.openModal}>
                                 <AddIcon style={{ marginRight: 10 }} /> Criar novo usuario
                             </Button>
                         </div>
@@ -268,9 +272,9 @@ function App() {
 
             </div>
 
-            <Modal1
-                id="modal-1"
-                isOpen={modalForm1.isModalOpen}
+            <ModalVisualizar
+                id="modal-visualizar"
+                isOpen={modalFormVisualizar.isModalOpen}
                 transition={ModalTransition.NONE}
             >
                 <div>
@@ -352,39 +356,39 @@ function App() {
 
                     <Grid item md={12}>
                         <Button style={{ border: '1px solid', color: '#4F5256', marginRight: 5 }}
-                            onClick={modalForm2.closeModal}
+                            onClick={modalFormVisualizar.closeModal}
                             className={classes.btn}
                         >
                             <ArrowBackIcon style={{ marginRight: 10 }} /> Voltar
                                 </Button>
                         <Button
-                            style={{ backgroundColor: '#4CAF50', marginRight: 5 }}
-                            onClick={modalForm2.openModal}
+                            style={{ backgroundColor: '#116ad7', marginRight: 5 }}
+                            onClick={modalFormEditar.openModal}
                             className={classes.btn}
                         >
                             <EditIcon style={{ marginRight: 10 }} /> Editar
                                 </Button>
                         <Button
-                            style={{ backgroundColor: '#4CAF50', marginRight: 5 }}
-                            onClick={modalConfirm.openModal}
+                            style={{ backgroundColor: '#3b93ff', marginRight: 5 }}
+                            onClick={modalForm3.openModal}
                             className={classes.btn}
                         >
                             <VisibilityIcon style={{ marginRight: 10 }} /> Visualizar Histórico
                                 </Button>
                         <Button
-                            style={{ backgroundColor: '#4CAF50' }}
-                            onClick={modalConfirm.openModal}
+                            style={{ backgroundColor: '#F44336' }}
+                            onClick={modalConfirmDeletar.openModal}
                             className={classes.btn}
                         >
                             <DeleteIcon style={{ marginRight: 10 }} /> Deletar
                                 </Button>
                     </Grid>
                 </Grid>
-            </Modal1>
+            </ModalVisualizar>
 
-            <Modal2
-                id="modal-2"
-                isOpen={modalForm2.isModalOpen}
+            <ModalEditar
+                id="modal-editar"
+                isOpen={modalFormEditar.isModalOpen}
                 transition={ModalTransition.NONE}
             >
                 <>
@@ -599,14 +603,14 @@ function App() {
 
                         <Grid item md={12}>
                             <Button style={{ border: '1px solid', color: '#4F5256', marginRight: 5 }}
-                                onClick={modalForm2.closeModal}
+                                onClick={modalFormEditar.closeModal}
                                 className={classes.btn}
                             >
                                 <ArrowBackIcon style={{ marginRight: 10 }} /> Voltar
                                 </Button>
                             <Button
                                 style={{ backgroundColor: '#4CAF50' }}
-                                onClick={modalConfirm.openModal}
+                                onClick={modalConfirmEditar.openModal}
                                 className={classes.btn}
                             >
                                 <SaveIcon style={{ marginRight: 10 }} /> Confirmar
@@ -614,12 +618,12 @@ function App() {
                         </Grid>
                     </Grid>
                 </>
-            </Modal2>
+            </ModalEditar>
 
 
-            <Modal1
-                id="modal-3"
-                isOpen={modalForm3.isModalOpen}
+            <ModalCriar
+                id="modal-criar"
+                isOpen={modalFormCriar.isModalOpen}
                 transition={ModalTransition.NONE}
             >
                 <>
@@ -800,14 +804,14 @@ function App() {
 
                         <Grid item md={12}>
                             <Button style={{ border: '1px solid', color: '#4F5256', marginRight: 5 }}
-                                onClick={modalForm2.closeModal}
+                                onClick={modalFormCriar.closeModal}
                                 className={classes.btn}
                             >
                                 <ArrowBackIcon style={{ marginRight: 10 }} /> Voltar
                                 </Button>
                             <Button
                                 style={{ backgroundColor: '#4CAF50' }}
-                                onClick={modalConfirm.openModal}
+                                onClick={modalConfirmCriar.openModal}
                                 className={classes.btn}
                             >
                                 <SaveIcon style={{ marginRight: 10 }} /> Confirmar
@@ -815,12 +819,12 @@ function App() {
                         </Grid>
                     </Grid>
                 </>
-            </Modal1>
+            </ModalCriar>
 
-            <Modal2
-                id="modal-4"
+            <ModalConfirm
+                id="modal-confirm-criar"
                 modalClassName={classes.modal_confirm}
-                isOpen={modalConfirm.isModalOpen}
+                isOpen={modalConfirmCriar.isModalOpen}
                 transition={ModalTransition.SCALE}
             >
                 <>
@@ -843,14 +847,133 @@ function App() {
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                         <Button
                             className={classes.btn}
-                            style={{ backgroundColor: '#F44336' }}
-                            onClick={modalConfirm.closeModal}
+                            style={{ backgroundColor: '#4CAF50' }}
+                            onClick={modalConfirmCriar.closeModal}
                         >
                             Ok
                             </Button>
                     </div>
                 </>
-            </Modal2>
+            </ModalConfirm>
+
+            <ModalConfirm
+                id="modal-confirm-editar"
+                modalClassName={classes.modal_confirm}
+                isOpen={modalConfirmEditar.isModalOpen}
+                transition={ModalTransition.SCALE}
+            >
+                <>
+                    <div style={{
+                        width: '100%',
+                        height: '90%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'column'
+                    }}>
+
+                        <div>
+                            <img src={iconAlert} style={{ width: 65 }} />
+                        </div>
+                        <div style={{ margin: '10px 0' }}>
+                            <h2>Você tem certeza?</h2>
+                        </div>
+                        Você tem certeza que deseja alterar esses dados?
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <Button style={{ border: '1px solid', color: '#4F5256', marginRight: 5 }}
+                            onClick={modalConfirmEditar.closeModal}
+                            className={classes.btn}
+                        >   
+                            Cancelar
+                            </Button>
+                        <Button
+                            className={classes.btn}
+                            style={{ backgroundColor: '#F44336' }}
+                            onClick={modalConfirmEditar.closeModal}
+                        >
+                            Sim, Alterar!
+                            </Button>
+                    </div>
+                </>
+            </ModalConfirm>
+
+            <ModalConfirm
+                id="modal-confirm-criar"
+                modalClassName={classes.modal_confirm}
+                isOpen={modalConfirmCriar.isModalOpen}
+                transition={ModalTransition.SCALE}
+            >
+                <>
+                    <div style={{
+                        width: '100%',
+                        height: '90%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'column'
+                    }}>
+
+                        <div>
+                            <img src={iconAlertSucess} style={{ width: 65 }} />
+                        </div>
+                        <div style={{ margin: '10px 0' }}>
+                            <h2>Usuário criado com sucesso!</h2>
+                        </div>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <Button
+                            className={classes.btn}
+                            style={{ backgroundColor: '#4CAF50' }}
+                            onClick={modalConfirmCriar.closeModal}
+                        >
+                            Ok
+                            </Button>
+                    </div>
+                </>
+            </ModalConfirm>
+
+            <ModalDelete
+                id="modal-confirm-delete"
+                modalClassName={classes.modal_confirm}
+                isOpen={modalConfirmDeletar.isModalOpen}
+                transition={ModalTransition.SCALE}
+            >
+                <>
+                    <div style={{
+                        width: '100%',
+                        height: '90%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'column'
+                    }}>
+
+                        <div>
+                            <img src={iconAlert} style={{ width: 65 }} />
+                        </div>
+                        <div style={{ margin: '10px 0' }}>
+                            <h2>Você tem certeza?</h2>
+                        </div>
+                        Você estará excluindo esse perfil permanentemente!
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <Button style={{ border: '1px solid', color: '#4F5256', marginRight: 5 }}
+                            onClick={modalConfirmDeletar.closeModal}
+                            className={classes.btn}
+                        >   
+                            Cancelar
+                            </Button>
+                        <Button
+                            className={classes.btn}
+                            style={{ backgroundColor: '#F44336' }}
+                            onClick={modalConfirmDeletar.closeModal}
+                        >
+                            Sim, deletar!
+                            </Button>
+                    </div>
+                </>
+            </ModalDelete>
         </ModalProvider>
     );
 }
