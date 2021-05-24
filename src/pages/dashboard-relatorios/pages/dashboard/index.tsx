@@ -4,7 +4,8 @@ import { Grid, Typography, Box } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, } from "recharts";
 import Manaus from "./data/index.js";
-import { RadioSVGMap } from "react-svg-map";
+import { SVGMap } from "react-svg-map";
+import  TooltipHeatMap  from  './utils/tooltip-heat-map' ;
 
 import "react-svg-map/lib/index.css";
 
@@ -36,6 +37,10 @@ const GraficoAreas = [
     { name: "", }
 ];
 
+const data = [
+    {name: "teste", id: "saofrancisco"},
+    {name: "teste2", id: "puraquequara"}
+];
 
 function Dashboard() {
 
@@ -232,9 +237,7 @@ function Dashboard() {
                                     Pacientes com covid-19
                                 </li>
                             </ul>
-                            <RadioSVGMap 
-                            map={Manaus}
-                            
+                            <TooltipHeatMap
                             />
                         </div>
 
