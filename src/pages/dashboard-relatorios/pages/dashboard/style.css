@@ -54,3 +54,9 @@
     float: left;
 }
 
+.mapa {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
+}

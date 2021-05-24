@@ -3,9 +3,7 @@ import './style.css';
 import { Grid, Typography, Box } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, } from "recharts";
-import Manaus from "./data/index.js";
-import { SVGMap } from "react-svg-map";
-import  TooltipHeatMap  from  './utils/tooltip-heat-map' ;
+import  TooltipHeatMap  from  './utils/manaus-map' ;
 
 import "react-svg-map/lib/index.css";
 
@@ -35,11 +33,6 @@ const GraficoAreas = [
     { id: "Casos confirmados", name: "", pv: 890 },
     { name: "", },
     { name: "", }
-];
-
-const data = [
-    {name: "teste", id: "saofrancisco"},
-    {name: "teste2", id: "puraquequara"}
 ];
 
 function Dashboard() {
@@ -237,8 +230,9 @@ function Dashboard() {
                                     Pacientes com covid-19
                                 </li>
                             </ul>
-                            <TooltipHeatMap
-                            />
+                            <div className={"mapa"}>
+                                <TooltipHeatMap />
+                            </div>
                         </div>
 
                     </Grid>

@@ -3,25 +3,32 @@ import { SVGMap } from "react-svg-map";
 import Manaus from "../data/index";
 import { getLocationName } from './utils';
 
+import './svg-map.scss';
+
 class TooltipHeatMap extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			pointedLocation: null,
+            focusedLocation: null,
 			tooltipStyle: {
 				display: 'none'
-			}
+			},
+            selectedLocation: null
 		};
 
 		this.handleLocationMouseOver = this.handleLocationMouseOver.bind(this);
 		this.handleLocationMouseOut = this.handleLocationMouseOut.bind(this);
 		this.handleLocationMouseMove = this.handleLocationMouseMove.bind(this);
+        this.handleOnChange = this.handleOnChange.bind(this);
+        this.handleLocationFocus = this.handleLocationFocus.bind(this);
+        this.handleLocationBlur = this.handleLocationBlur.bind(this);
 	}
 
 	handleLocationMouseOver(event) {
 		const pointedLocation = getLocationName(event);
-		this.setState({ pointedLocation });
+		this.setState({ pointedLocation: pointedLocation });
 	}
 
 	handleLocationMouseOut() {
@@ -35,6 +42,15 @@ class TooltipHeatMap extends React.Component {
 			left: event.clientX - 100
 		};
 		this.setState({ tooltipStyle });
+	}
+
+    handleLocationFocus(event) {
+		const focusedLocation = getLocationName(event);
+		this.setState({ focusedLocation: focusedLocation });
+	}
+
+    handleLocationBlur() {
+		this.setState({ focusedLocation: null });
 	}
     
 	handleOnChange(selectedNode) {
@@ -53,7 +69,6 @@ class TooltipHeatMap extends React.Component {
 
 	render() {
 		return (
-			<article className="examples__block">
 				<div className="examples__block__map examples__block__map--usa">
 					<SVGMap
 						map={Manaus}
@@ -61,12 +76,13 @@ class TooltipHeatMap extends React.Component {
 						onLocationMouseOver={this.handleLocationMouseOver}
 						onLocationMouseOut={this.handleLocationMouseOut}
 						onLocationMouseMove={this.handleLocationMouseMove} 
+                        onLocationFocus={this.handleLocationFocus}
+						onLocationBlur={this.handleLocationBlur}
                         onChange={this.handleOnChange}/>
 					<div className="examples__block__map__tooltip" style={this.state.tooltipStyle}>
 						{this.state.pointedLocation}
 					</div>
 				</div>
-			</article>
 		);
 	}
 }
