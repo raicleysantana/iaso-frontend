@@ -5,11 +5,13 @@ import {Link} from 'react-router-dom';
 function Home() {
 
 	useEffect(() => {
-		fetch("https://iaso-api.000webhostapp.com", {
+		fetch("http://iaso.atwebpages.com", {
       		method: 'GET',
       		headers: {
-        		'Content-Type': 'application/json',
-        		"Access-Control-Allow-Origin": "*"
+        		"Access-Control-Allow-Origin": "*",
+       			"Access-Control-Allow-Headers": "Authorization", 
+        		"Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE" ,
+      			"Content-Type": "application/json;charset=UTF-8" 
       		},
       //body: JSON.stringify({ produto })
     })
