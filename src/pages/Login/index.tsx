@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {
     AppBar,
@@ -18,8 +18,26 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './style.css';
 import logo from '../../assets/images/logo.png';
+import api from "../../services/api";
+import {Simulate} from "react-dom/test-utils";
 
 function Login() {
+    const [cpf, setCpf] = useState('');
+    const [lembrarme, setLembrarme] = useState(false);
+
+    // @ts-ignore
+    async function handleLogin(e) {
+        e.preventDefault();
+
+        const response = await api.post("/login.php");
+
+        alert(response.data.mensagem);
+    }
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setLembrarme(event.target.checked);
+    }
+
     return (
         <>
             <AppBar position="static" color='inherit' className="barra-menu">
@@ -62,6 +80,7 @@ function Login() {
                                         }}
                                         fullWidth
                                         variant="outlined"
+                                        onChange={event => setCpf(event.target.value)}
                                     />
                                 </div>
 
@@ -75,6 +94,7 @@ function Login() {
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
+
                                         fullWidth
                                         variant="outlined"
                                     />
@@ -83,12 +103,20 @@ function Login() {
                                 <div className="form-group"
                                      style={{marginTop: 10, display: 'flex', justifyContent: 'space-between'}}>
                                     <FormControlLabel
-                                        control={<Checkbox checked={false} name="checkedG"/>}
+                                        control={<Checkbox
+                                            checked={lembrarme}
+                                            name="checkedG"
+                                            onChange={e => setLembrarme(e.target.checked)}
+                                        />}
                                         label="Lembrar-se de mim"
+
                                     />
                                     <Button
                                         className="form-btn"
                                         variant="contained"
+                                        onClick={(e) => {
+                                            handleLogin(e);
+                                        }}
                                     >
                                         Entrar
                                     </Button>
