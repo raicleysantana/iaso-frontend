@@ -30,7 +30,7 @@ function Login() {
     async function handleLogin(e) {
         e.preventDefault();
 
-        fetch(`${process.env.REACT_APP_URL}login.php`, {
+        fetch(`${process.env.REACT_APP_URL_API}/login.php`, {
             method: 'post',
             body: JSON.stringify({ cpf, password })
         }).then(function (response) {
