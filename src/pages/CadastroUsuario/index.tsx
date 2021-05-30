@@ -31,6 +31,7 @@ function getStepContent(step: number) {
 function CadastroUsuario() {
 
     const steps = getSteps();
+    
     const [activeStep, setActiveStep] = React.useState(0);
     const [data_nascimento, setData_nascimento] = useState<Date | null>(new Date(''));
     const [nome_completo, setNome_clompleto] = useState('');
@@ -59,14 +60,13 @@ function CadastroUsuario() {
         const step = activeStep + 1;
 
         if (step == 2) {
-           
+
             if (senha != confirmar) {
                 alert("As senhas não conferem");
                 return false;
             }
-            
-            
-            
+
+
         }
     };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Card, CardContent, Grid, TextField, Typography} from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -37,7 +37,32 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function Configuracao() {
+interface Props {
+    dados: object,
+}
+
+const Configuracao: React.FC<Props> = (props) => {
+
+    const [activeStep, setActiveStep] = React.useState(0);
+    const [data_nascimento, setData_nascimento] = useState<Date | null>(new Date(''));
+    const [nome_completo, setNome_clompleto] = useState('');
+    const [rg, setRg] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [bairro, setBairro] = useState('');
+    const [rua, setRua] = useState('');
+    const [numero_casa, setNumero_casa] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [sexo, setSexo] = useState('');
+    const [email, setEmail] = useState('');
+    const [cartao_sus, setCartao_sus] = useState('');
+    const [usuario, setUsuario] = useState('');
+
+    useEffect(() => {
+        const dados = localStorage.getItem('dados');
+        // @ts-ignore
+        console.log(props);
+    }, []);
+
     const classes = useStyles();
     //const {isModalOpen, openModal, closeModal} = useModal();
     const modalForm = useModalForm();

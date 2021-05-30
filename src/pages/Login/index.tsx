@@ -33,8 +33,11 @@ function Login() {
 
         await api.post('login/log', {
             nome, senha
-        }).then(function (data) {
-            if (data) {
+        }).then(function (response) {
+            if (response.data) {
+                const _id = response.data;
+                console.log(_id);
+                localStorage.setItem('id', _id);
                 history.push("/dashboard-paciente");
             }
         }).catch(function (error) {

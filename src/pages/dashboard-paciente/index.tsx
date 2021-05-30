@@ -32,23 +32,28 @@ import api from "../../services/api";
 
 const drawerWidth = 280;
 
-
 interface Props {
     window?: () => Window;
 }
 
 function Administrativo(props: Props) {
 
-    const [login, setLoing] = useState([]);
+    const [login, setLogin] = useState([]);
     const [codigo, setCodigo] = useState(0);
     const [nome, setNome] = useState('');
-
+    const [cadastro, setCadastro] = useState([]);
+    const id = localStorage.getItem('id');
     useEffect(() => {
-        api.post(`/cadastro/load?id=1`).then(function (response) {
-            const {codigo, nome_completo} = response.data;
-            setCodigo(codigo);
-            setNome(nome_completo);
-        }).catch(function (error) {
+
+        api.post(`/cadastro/load?id=${id}`)
+            .then(function (response) {
+                const {codigo, nome_completo} = response.data;
+                const dados = response.data;
+                setCadastro(response.data);
+                localStorage.setItem('dados', JSON.stringify(dados));
+                setCodigo(codigo);
+                setNome(nome_completo);
+            }).catch(function (error) {
             alert(error);
         });
 
@@ -81,7 +86,7 @@ function Administrativo(props: Props) {
         {
             path: "/dashboard-paciente/configuracao",
             sidebar: () => <div>Configuração</div>,
-            main: () => <Configuracao/>,
+            main: () => <Configuracao dados={cadastro}/>,
         }
     ];
 
