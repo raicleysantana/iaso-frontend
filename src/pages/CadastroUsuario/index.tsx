@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {
     AppBar, Button, Card, CardContent, FormControl, FormControlLabel, FormLabel, Grid,
@@ -32,18 +32,42 @@ function CadastroUsuario() {
 
     const steps = getSteps();
     const [activeStep, setActiveStep] = React.useState(0);
-    const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-        new Date('2014-08-18T21:11:54'),
-    );
+    const [data_nascimento, setData_nascimento] = useState<Date | null>(new Date(''));
+    const [nome_completo, setNome_clompleto] = useState('');
+    const [rg, setRg] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [bairro, setBairro] = useState('');
+    const [rua, setRua] = useState('');
+    const [numero_casa, setNumero_casa] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [sexo, setSexo] = useState('');
+    const [email, setEmail] = useState('');
+    const [cartao_sus, setCartao_sus] = useState('');
+    const [usuario, setUsuario] = useState('');
 
-    const [sexo, setSexo] = React.useState('');
+    const [senha, setSenha] = useState('');
+    const [confirmar, setCofirmar] = useState('');
+
 
     const handleDateChange = (date: Date | null) => {
-        setSelectedDate(date);
+        setData_nascimento(date);
     };
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+        const step = activeStep + 1;
+
+        if (step == 2) {
+           
+            if (senha != confirmar) {
+                alert("As senhas não conferem");
+                return false;
+            }
+            
+            
+            
+        }
     };
 
     const handleBack = () => {
@@ -97,6 +121,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    onChange={event => setNome_clompleto(event.target.value)}
                                 />
                             </div>
                         </Grid>
@@ -114,6 +139,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    onChange={event => setRg(event.target.value)}
                                 />
                             </div>
                         </Grid>
@@ -131,6 +157,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    onChange={event => setCpf(event.target.value)}
                                 />
                             </div>
                         </Grid>
@@ -141,13 +168,14 @@ function CadastroUsuario() {
                                     id="date"
                                     label="Data de Nascimento"
                                     type="date"
-                                    defaultValue="2018-05-24"
+                                    defaultValue=""
                                     className=""
                                     style={{marginTop: 8, width: '100%'}}
                                     margin="normal"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    onChange={event => setData_nascimento(new Date(event.target.value))}
                                 />
                             </div>
                         </Grid>
@@ -180,6 +208,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    onChange={event => setBairro(event.target.value)}
                                 />
                             </div>
                         </Grid>
@@ -187,7 +216,6 @@ function CadastroUsuario() {
                         <Grid item xs={12} md={4}>
                             <div className="form-group">
                                 <TextField
-                                    id="form-nome"
                                     className="input"
                                     label="Rua"
                                     style={{marginTop: 8, width: '100%'}}
@@ -197,6 +225,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    onChange={event => setRua(event.target.value)}
                                 />
                             </div>
                         </Grid>
@@ -214,6 +243,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    onChange={event => setNumero_casa(event.target.value)}
                                 />
                             </div>
                         </Grid>
@@ -236,6 +266,25 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    onChange={event => setEmail(event.target.value)}
+                                />
+                            </div>
+                        </Grid>
+
+                        <Grid item xs={12} md={12}>
+                            <div className="form-group">
+                                <TextField
+                                    id="form-login"
+                                    className="input"
+                                    label="Usuário"
+                                    style={{marginTop: 8, width: '100%'}}
+                                    margin="normal"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    fullWidth
+                                    variant="outlined"
+                                    onChange={event => setUsuario(event.target.value)}
                                 />
                             </div>
                         </Grid>
@@ -253,6 +302,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    onChange={event => setSenha(event.target.value)}
                                 />
                             </div>
                         </Grid>
@@ -270,6 +320,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    onChange={event => setCofirmar(event.target.value)}
                                 />
                             </div>
                         </Grid>
@@ -287,6 +338,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    onChange={event => setTelefone(event.target.value)}
                                 />
                             </div>
                         </Grid>
@@ -304,6 +356,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    onChange={event => setCartao_sus(event.target.value)}
                                 />
                             </div>
                         </Grid>
@@ -317,16 +370,16 @@ function CadastroUsuario() {
                                 Verificação de celular
                             </Typography>
                             <div className="verificacao-box">
-                                <div className="verificacao-content" style={{ flexDirection : 'row'}}>
+                                <div className="verificacao-content" style={{flexDirection: 'row'}}>
                                     <span className="verificacao-numero">8</span>
                                     <span className="verificacao-numero">8</span>
                                     <span className="verificacao-numero">7</span>
                                     <span className="verificacao-numero">6</span>
                                 </div>
                                 <div className="">
-                                    <p style={{textAlign : 'center', fontSize : 14}}>codigo irá expirar em : 03:12</p>
+                                    <p style={{textAlign: 'center', fontSize: 14}}>codigo irá expirar em : 03:12</p>
 
-                                    <div style={{ marginTop : 20, marginBottom : 40}}>
+                                    <div style={{marginTop: 20, marginBottom: 40}}>
                                         <Button
                                             style={{marginTop: 5, backgroundColor: '#1FCC79', color: '#FFF'}}
                                             className="btn-verificacao">
@@ -347,11 +400,13 @@ function CadastroUsuario() {
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={12}>
                             <div>
+
                                 <Button
                                     style={{float: 'left', marginTop: 5}}
                                     disabled={activeStep === 0} onClick={handleBack} className="btn-primary">
                                     Voltar
                                 </Button>
+
                                 <Button
                                     style={{float: 'right', marginTop: 5}}
                                     variant="contained"
@@ -359,11 +414,13 @@ function CadastroUsuario() {
                                     onClick={handleNext}
                                     className="btn-primary"
                                 >
-                                    {activeStep === steps.length - 1 ? 'Finalizar' : 'Proximo'}
+                                    {activeStep == 0 ? 'Proximo' : (activeStep == 1) ? 'Cadastrar' : 'Finalizar'}
                                 </Button>
+
                             </div>
                         </Grid>
                     </Grid>
+                    {console.log(activeStep)}
                 </CardContent>
             </Card>
         </div>

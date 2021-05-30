@@ -1,8 +1,10 @@
-import React, {Suspense, lazy} from 'react';
+import React, {Suspense, lazy, useEffect, useState} from 'react';
 import {
     AppBar,
-    Divider, Drawer, Grid, Hidden,
-    IconButton, List,
+    Divider,
+    Drawer,
+    Hidden,
+    List,
     ListItem,
     ListItemIcon,
     ListItemText,
@@ -26,44 +28,63 @@ import SolicitaAtendimento from './pages/solicita-atendimento';
 import FilaVirtual from './pages/fila-virtual';
 import Configuracao from './pages/configuracao';
 import Relatorios from './pages/relatorios';
+import api from "../../services/api";
 
 const drawerWidth = 280;
 
-const routes = [
-
-    {
-        path: "/dashboard-paciente",
-        exact: true,
-        sidebar: () => <div>home!</div>,
-        main: () => <h2>Home</h2>
-    },
-    {
-        path: "/dashboard-paciente/solicita_atendimento",
-        sidebar: () => <div>Solicita Atendimento!</div>,
-        main: () => <SolicitaAtendimento/>
-    },
-    {
-        path: "/dashboard-paciente/fila-virtual",
-        sidebar: () => <div>Fila Virtual</div>,
-        main: () => <FilaVirtual/>
-    },
-    {
-        path: "/dashboard-paciente/relatorios",
-        sidebar: () => <div>Relatórios</div>,
-        main: () => <Relatorios/>
-    },
-    {
-        path: "/dashboard-paciente/configuracao",
-        sidebar: () => <div>Configuração</div>,
-        main: () => <Configuracao/>,
-    }
-];
 
 interface Props {
     window?: () => Window;
 }
 
 function Administrativo(props: Props) {
+
+    const [login, setLoing] = useState([]);
+    const [codigo, setCodigo] = useState(0);
+    const [nome, setNome] = useState('');
+
+    useEffect(() => {
+        api.post(`/cadastro/load?id=1`).then(function (response) {
+            const {codigo, nome_completo} = response.data;
+            setCodigo(codigo);
+            setNome(nome_completo);
+        }).catch(function (error) {
+            alert(error);
+        });
+
+
+    }, []);
+
+    const routes = [
+
+        {
+            path: "/dashboard-paciente",
+            exact: true,
+            sidebar: () => <div>home!</div>,
+            main: () => <h2>Home</h2>
+        },
+        {
+            path: "/dashboard-paciente/solicita_atendimento",
+            sidebar: () => <div>Solicita Atendimento!</div>,
+            main: () => <SolicitaAtendimento/>
+        },
+        {
+            path: "/dashboard-paciente/fila-virtual",
+            sidebar: () => <div>Fila Virtual</div>,
+            main: () => <FilaVirtual/>
+        },
+        {
+            path: "/dashboard-paciente/relatorios",
+            sidebar: () => <div>Relatórios</div>,
+            main: () => <Relatorios/>
+        },
+        {
+            path: "/dashboard-paciente/configuracao",
+            sidebar: () => <div>Configuração</div>,
+            main: () => <Configuracao/>,
+        }
+    ];
+
     const {window} = props;
     const classes = useStyles();
     const theme = useTheme();
@@ -79,7 +100,7 @@ function Administrativo(props: Props) {
                 <div className="avatar">
                     <img src={avatar} style={{width: 50}}/>
                     <Typography variant="h6" style={{color: 'var(--color-text-gray)'}}>
-                        Usuário
+                        {nome}
                     </Typography>
                 </div>
             </div>
