@@ -1,10 +1,5 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
 import {
-    AppBar,
-    IconButton,
-    Toolbar,
-    Typography,
     Card,
     CardContent,
     Grid,
@@ -13,7 +8,6 @@ import {
     FormGroup,
     FormControl,
     FormLabel,
-    InputLabel,
     MenuItem,
     Select,
     Button
@@ -23,6 +17,49 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import './style.css';
 
 function PreAtendimento() {
+
+    const [sintomas, setSintomas] = useState([
+        {id: 1, name: 'sintomas', label: 'Febre', value: 'Febre', isChecked: false},
+        {id: 2, name: 'sintomas', label: 'Falta de Ar', value: 'Falta de Ar', isChecked: false},
+        {id: 3, name: 'sintomas', label: 'Tosse', value: 'Tosse', isChecked: false},
+        {id: 4, name: 'sintomas', label: 'Coriza', value: 'Coriza', isChecked: false},
+        {id: 5, name: 'sintomas', label: 'Diarréia', value: 'Diarréia', isChecked: false},
+        {id: 6, name: 'sintomas', label: 'Dor de Cabeça', value: 'Dor de Cabeça', isChecked: false},
+        {
+            id: 7,
+            name: 'sintomas',
+            label: 'Perda de paladar ou ofato',
+            value: 'Perda de paladar ou ofato',
+            isChecked: false
+        },
+        {id: 8, name: 'sintomas', label: 'Outros', value: 'Outros', isChecked: false},
+    ]);
+
+    useEffect(() => {
+
+    }, []);
+    /*const handleAllChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
+        let sintomas = sintomas;
+        sintomas.forEach(item => item.isChecked = event.target.checked)
+        setSintomas({sintomas: sintomas})
+    }*/
+
+    const handleChange = async (event: React.FormEvent<HTMLInputElement>, index: any) => {
+        let value = event.currentTarget.value;
+        let checked = event.currentTarget.checked;
+
+        let _sintomas = [...sintomas];
+        
+        _sintomas.forEach(sintoma => {
+            if (sintoma.value === value) {
+                sintoma.isChecked = checked;
+            }
+        });
+        console.log(sintomas);
+        return setSintomas(_sintomas);
+
+    };
+
     return (<>
             <div className="content">
                 <Card>
@@ -37,43 +74,20 @@ function PreAtendimento() {
                                     </FormLabel>
                                     <br/>
                                     <FormGroup>
-                                        <FormControlLabel
-                                            control={<Checkbox checked={true} name="gilad"/>}
-                                            label="Febre"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox checked={false} name="jason"/>}
-                                            label="Falta de Ar"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox checked={false} name="antoine"/>}
-                                            label="Tosse"
-                                        />
 
-                                        <FormControlLabel
-                                            control={<Checkbox checked={false} name="antoine"/>}
-                                            label="Coriza"
-                                        />
-
-                                        <FormControlLabel
-                                            control={<Checkbox checked={false} name="antoine"/>}
-                                            label="Diarréia"
-                                        />
-
-                                        <FormControlLabel
-                                            control={<Checkbox checked={false} name="antoine"/>}
-                                            label="Dor de Cabeça"
-                                        />
-
-                                        <FormControlLabel
-                                            control={<Checkbox checked={false} name="antoine"/>}
-                                            label="Perda de paladar ou ofato"
-                                        />
-
-                                        <FormControlLabel
-                                            control={<Checkbox checked={false} name="antoine"/>}
-                                            label="Outros"
-                                        />
+                                        {[...sintomas].map((item, index) => (
+                                            <FormControlLabel
+                                                key={item.id}
+                                                control={<Checkbox
+                                                    checked={item.isChecked}
+                                                    name={"sintomas"}
+                                                    value={item.label}
+                                                    onChange={(e) => handleChange(e, index)}
+                                                />
+                                                }
+                                                label={item.label}
+                                            />
+                                        ))}
                                     </FormGroup>
                                 </FormControl>
                             </Grid>
