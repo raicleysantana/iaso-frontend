@@ -1,19 +1,16 @@
-import React, {useState} from 'react';
-import {Link, useLocation, Redirect, useHistory} from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Link, useHistory} from 'react-router-dom';
 import {
     AppBar,
     IconButton,
     Toolbar,
     Typography,
     Button,
-    Container,
     Card,
     CardContent,
-    Grid,
     TextField,
     Checkbox,
     FormControlLabel,
-    FormGroup
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './style.css';
@@ -26,6 +23,14 @@ function Login() {
     const [lembrarme, setLembrarme] = useState(false);
 
     const history = useHistory();
+    useEffect(() => {
+        const id = localStorage.getItem('id');
+
+        if (id) {
+            history.push("/dashboard-paciente");
+        }
+    }, []);
+
 
     // @ts-ignore
     async function handleLogin(e) {
@@ -36,7 +41,7 @@ function Login() {
         }).then(function (response) {
             if (response.data) {
                 const _id = response.data;
-                console.log(_id);
+
                 localStorage.setItem('id', _id);
                 history.push("/dashboard-paciente");
             }

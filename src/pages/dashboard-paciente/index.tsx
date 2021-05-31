@@ -1,4 +1,4 @@
-import React, {Suspense, lazy, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     AppBar,
     Divider,
@@ -15,7 +15,7 @@ import {
     Link,
     Route,
     BrowserRouter as Router,
-    Switch
+    Switch, useHistory
 } from "react-router-dom";
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import AssignmentIcon from '@material-ui/icons/Assignment';
@@ -37,12 +37,13 @@ interface Props {
 }
 
 function Administrativo(props: Props) {
-
+    const history = useHistory();
     const [login, setLogin] = useState([]);
     const [codigo, setCodigo] = useState(0);
     const [nome, setNome] = useState('');
     const [cadastro, setCadastro] = useState([]);
     const id = localStorage.getItem('id');
+
     useEffect(() => {
 
         api.post(`/cadastro/load?id=${id}`)
@@ -59,6 +60,14 @@ function Administrativo(props: Props) {
 
 
     }, []);
+
+    function sair() {
+
+        localStorage.removeItem('id');
+        localStorage.removeItem('dados');
+
+        history.push('/login');
+    }
 
     const routes = [
 
@@ -138,7 +147,7 @@ function Administrativo(props: Props) {
             </List>
             <Divider/>
             <List>
-                <ListItem button>
+                <ListItem button onClick={sair}>
                     <ListItemIcon style={{color: 'var(--color-text-green)'}}><PowerSettingsNewIcon/></ListItemIcon>
                     <ListItemText primary={'Sair'}/>
                 </ListItem>

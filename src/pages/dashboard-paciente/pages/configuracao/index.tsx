@@ -37,15 +37,22 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+export interface Cadastro {
+    dados: {
+        codigo: string,
+        nome_completo: string
+    }
+}
+
 interface Props {
-    dados: object,
+    dados?: Cadastro[],
 }
 
 const Configuracao: React.FC<Props> = (props) => {
 
     const [activeStep, setActiveStep] = React.useState(0);
-    const [data_nascimento, setData_nascimento] = useState<Date | null>(new Date(''));
-    const [nome_completo, setNome_clompleto] = useState('');
+    const [nascimento, setNascimento] = useState('');
+    const [nome_completo, setNome_completo] = useState('');
     const [rg, setRg] = useState('');
     const [cpf, setCpf] = useState('');
     const [bairro, setBairro] = useState('');
@@ -56,12 +63,43 @@ const Configuracao: React.FC<Props> = (props) => {
     const [email, setEmail] = useState('');
     const [cartao_sus, setCartao_sus] = useState('');
     const [usuario, setUsuario] = useState('');
+    const [cep, setCep] = useState('');
+    const [senha, setSenha] = useState('');
 
     useEffect(() => {
-        const dados = localStorage.getItem('dados');
-        // @ts-ignore
-        console.log(props);
+        loadDados();
     }, []);
+
+    async function loadDados() {
+        const dados = props.dados;
+        //console.log(dados.login_codigo.senha);
+        // @ts-ignore
+        setNome_completo(dados.nome_completo);
+        // @ts-ignore
+        setRg(dados.rg);
+        // @ts-ignore
+        setCpf(dados.cpf);
+        // @ts-ignore
+        setBairro(dados.bairro);
+        // @ts-ignore
+        setRua(dados.rua);
+        // @ts-ignore
+        setNumero_casa(dados.numero_casa);
+        // @ts-ignore
+        setEmail(dados.email);
+        // @ts-ignore
+        setTelefone(dados.telefone);
+        // @ts-ignore
+        setCep(dados.cep);
+        // @ts-ignore
+        setNascimento(dados.nascimento);
+        // @ts-ignore
+        setCep(dados.cep);
+        // @ts-ignore
+        setSenha(dados.login_codigo.senha);
+        // @ts-ignore
+        console.log(dados);
+    }
 
     const classes = useStyles();
     //const {isModalOpen, openModal, closeModal} = useModal();
@@ -83,55 +121,55 @@ const Configuracao: React.FC<Props> = (props) => {
                                     Nome
                                 </Grid>
                                 <Grid item xs={12} md={9}>
-                                    Nome
+                                    {nome_completo}
                                 </Grid>
                                 <Grid item xs={12} md={3}>
                                     Email
                                 </Grid>
                                 <Grid item xs={12} md={9}>
-                                    Email
+                                    {email}
                                 </Grid>
                                 <Grid item xs={12} md={3}>
                                     RG
                                 </Grid>
                                 <Grid item xs={12} md={9}>
-                                    RG
+                                    {rg}
                                 </Grid>
                                 <Grid item xs={12} md={3}>
                                     CPF
                                 </Grid>
                                 <Grid item xs={12} md={9}>
-                                    CPF
+                                    {cpf}
                                 </Grid>
                                 <Grid item xs={12} md={3}>
                                     Contato
                                 </Grid>
                                 <Grid item xs={12} md={9}>
-                                    Contato
+                                    {telefone}
                                 </Grid>
                                 <Grid item xs={12} md={3}>
                                     Data de Nascimento
                                 </Grid>
                                 <Grid item xs={12} md={9}>
-                                    dd/mm/aaaa
+                                    {nascimento}
                                 </Grid>
                                 <Grid item xs={12} md={3}>
                                     CEP
                                 </Grid>
                                 <Grid item xs={12} md={9}>
-                                    69084-623
+                                    {cep}
                                 </Grid>
                                 <Grid item xs={12} md={3}>
                                     Rua
                                 </Grid>
                                 <Grid item xs={12} md={9}>
-                                    Rua sei lá
+                                    {rua}
                                 </Grid>
                                 <Grid item xs={12} md={3}>
                                     Nº
                                 </Grid>
                                 <Grid item xs={12} md={9}>
-                                    38
+                                    {numero_casa}
                                 </Grid>
                             </Grid>
                             <div>
@@ -172,6 +210,8 @@ const Configuracao: React.FC<Props> = (props) => {
                                     size="small"
                                     InputLabelProps={{shrink: false}}
                                     className={classes.textField}
+                                    value={nome_completo}
+                                    onChange={event => setNome_completo(event.target.value)}
                                 />
                             </Grid>
 
@@ -186,6 +226,8 @@ const Configuracao: React.FC<Props> = (props) => {
                                     size="small"
                                     InputLabelProps={{shrink: false}}
                                     className={classes.textField}
+                                    value={email}
+                                    onChange={event => setEmail(event.target.value)}
                                 />
                             </Grid>
 
@@ -200,6 +242,8 @@ const Configuracao: React.FC<Props> = (props) => {
                                     size="small"
                                     InputLabelProps={{shrink: false}}
                                     className={classes.textField}
+                                    value={rg}
+                                    onChange={event => setRg(event.target.value)}
                                 />
                             </Grid>
 
@@ -214,6 +258,8 @@ const Configuracao: React.FC<Props> = (props) => {
                                     size="small"
                                     InputLabelProps={{shrink: false}}
                                     className={classes.textField}
+                                    value={cpf}
+                                    onChange={event => setCpf(event.target.value)}
                                 />
                             </Grid>
 
@@ -228,6 +274,8 @@ const Configuracao: React.FC<Props> = (props) => {
                                     size="small"
                                     InputLabelProps={{shrink: false}}
                                     className={classes.textField}
+                                    value={telefone}
+                                    onChange={event => setTelefone(event.target.value)}
                                 />
                             </Grid>
 
@@ -242,6 +290,8 @@ const Configuracao: React.FC<Props> = (props) => {
                                     size="small"
                                     InputLabelProps={{shrink: false}}
                                     className={classes.textField}
+                                    value={nascimento}
+                                    onChange={event => setNascimento(event.target.value)}
                                 />
                             </Grid>
 
@@ -256,6 +306,8 @@ const Configuracao: React.FC<Props> = (props) => {
                                     size="small"
                                     InputLabelProps={{shrink: false}}
                                     className={classes.textField}
+                                    value={cep}
+                                    onChange={event => setCep(event.target.value)}
                                 />
                             </Grid>
 
@@ -270,6 +322,8 @@ const Configuracao: React.FC<Props> = (props) => {
                                     size="small"
                                     InputLabelProps={{shrink: false}}
                                     className={classes.textField}
+                                    value={rua}
+                                    onChange={event => setRua(event.target.value)}
                                 />
                             </Grid>
 
@@ -284,13 +338,15 @@ const Configuracao: React.FC<Props> = (props) => {
                                     size="small"
                                     InputLabelProps={{shrink: false}}
                                     className={classes.textField}
+                                    value={numero_casa}
+                                    onChange={event => setNumero_casa(event.target.value)}
                                 />
                             </Grid>
 
                             <Grid item xs={12} md={3} className={classes.label}>
                                 Senha
                             </Grid>
-                            <Grid item xs={4} md={5}>
+                            <Grid item xs={12} md={9}>
                                 <TextField
                                     id=""
                                     label=""
@@ -298,18 +354,11 @@ const Configuracao: React.FC<Props> = (props) => {
                                     size="small"
                                     InputLabelProps={{shrink: false}}
                                     className={classes.textField}
+                                    value={senha}
+                                    onChange={event => setSenha(event.target.value)}
                                 />
                             </Grid>
-                            <Grid item xs={4} md={4}>
-                                <TextField
-                                    id=""
-                                    label=""
-                                    variant="outlined"
-                                    size="small"
-                                    InputLabelProps={{shrink: false}}
-                                    className={classes.textField}
-                                />
-                            </Grid>
+
 
                             <Grid item md={12}>
                                 <Button style={{border: '1px solid', color: '#4F5256', marginRight: 5}}
