@@ -10,6 +10,7 @@ import {
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import './style.css';
+import api from "../../services/api";
 
 function getSteps() {
     return ['Dados Pessoais', 'Criação de Conta', 'Confirmação'];
@@ -31,7 +32,7 @@ function getStepContent(step: number) {
 function CadastroUsuario() {
 
     const steps = getSteps();
-    
+
     const [activeStep, setActiveStep] = React.useState(0);
     const [data_nascimento, setData_nascimento] = useState<Date | null>(new Date(''));
     const [nome_completo, setNome_clompleto] = useState('');
@@ -45,7 +46,7 @@ function CadastroUsuario() {
     const [email, setEmail] = useState('');
     const [cartao_sus, setCartao_sus] = useState('');
     const [usuario, setUsuario] = useState('');
-
+    const [cep, setCep] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmar, setCofirmar] = useState('');
 
@@ -55,19 +56,78 @@ function CadastroUsuario() {
     };
 
     const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        //setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
         const step = activeStep + 1;
 
-        if (step == 2) {
+        switch (step) {
+            case 0:
+                setActiveStep((prevActiveStep) => prevActiveStep + 1);
+                break;
+            case 1:
+                if (senha != confirmar) {
+                    alert("As senhas não conferem");
+                    return false;
+                }
+                setActiveStep((prevActiveStep) => prevActiveStep + 1);
+                break;
+            case 2:
+                let numero = Math.floor(Math.random() * 1000);
 
-            if (senha != confirmar) {
-                alert("As senhas não conferem");
-                return false;
-            }
+                console.log(JSON.stringify({
+                    nome_completo,
+                    nome_mae: "",
+                    cpf,
+                    cns: numero,
+                    raca_cor: "",
+                    cep,
+                    bairro,
+                    rua,
+                    numero_casa,
+                    nacionalidade: "Brasileiro",
+                    naturalidade: "amazonas",
+                    telefone,
+                    cartao_sus,
+                    nascimento: '0000-00-00',
+                    paciente_funcionario: "paciente",
+                    senha
+                }));
 
+                api.post('cadastro/cadc', {
+                    nome_completo,
+                    nome_mae: "",
+                    cns: numero,
+                    sexo,
+                    raca_cor: "",
+                    cep,
+                    bairro,
+                    rua,
+                    numero_casa,
+                    nacionalidade: "Brasileiro",
+                    naturalidade: "amazonas",
+                    telefone,
+                    cartao_sus,
+                    nascimento: '0000-00-00',
+                    paciente_funcionario: "paciente",
+                    senha
+                })
+                    .then(function (response) {
+                        if (response.data) {
+                            alert("Dados cadastrados com sucesso!")
+                        } else {
+                            alert("Error ao salvar");
+                        }
+                    }).catch(function (error) {
+                    alert(error);
+                });
+
+                setActiveStep((prevActiveStep) => prevActiveStep + 1);
+                break
+            default:
+                break;
 
         }
+
     };
 
     const handleBack = () => {
@@ -121,6 +181,10 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    value={nome_completo}
+                                    inputProps={{
+                                        maxLength: 100,
+                                    }}
                                     onChange={event => setNome_clompleto(event.target.value)}
                                 />
                             </div>
@@ -139,6 +203,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    value={rg}
                                     onChange={event => setRg(event.target.value)}
                                 />
                             </div>
@@ -155,8 +220,12 @@ function CadastroUsuario() {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    inputProps={{
+                                        maxLength: 11,
+                                    }}
                                     fullWidth
                                     variant="outlined"
+                                    value={cpf}
                                     onChange={event => setCpf(event.target.value)}
                                 />
                             </div>
@@ -175,6 +244,7 @@ function CadastroUsuario() {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    //value={data_nascimento}
                                     onChange={event => setData_nascimento(new Date(event.target.value))}
                                 />
                             </div>
@@ -183,8 +253,12 @@ function CadastroUsuario() {
                         <Grid item xs={12} md={6}>
                             <FormControl component="fieldset" style={{width: '100%'}}>
                                 <FormLabel component="legend">Sexo</FormLabel>
-                                <RadioGroup style={{display: 'inline-block'}} aria-label="gender" name="gender1"
-                                            value={sexo} onChange={handleChangeSexo}>
+                                <RadioGroup
+                                    style={{display: 'inline-block'}}
+                                    aria-label="gender" name="gender1"
+                                    value={sexo}
+                                    onChange={handleChangeSexo}
+                                >
                                     <FormControlLabel style={{float: 'left', width: '45%'}} value="M"
                                                       control={<Radio/>}
                                                       label="Masculino"/>
@@ -208,6 +282,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    value={bairro}
                                     onChange={event => setBairro(event.target.value)}
                                 />
                             </div>
@@ -223,8 +298,12 @@ function CadastroUsuario() {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    inputProps={{
+                                        maxLength: 30,
+                                    }}
                                     fullWidth
                                     variant="outlined"
+                                    value={rua}
                                     onChange={event => setRua(event.target.value)}
                                 />
                             </div>
@@ -241,9 +320,32 @@ function CadastroUsuario() {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    inputProps={{
+                                        maxLength: 10,
+                                    }}
                                     fullWidth
                                     variant="outlined"
+                                    value={numero_casa}
                                     onChange={event => setNumero_casa(event.target.value)}
+                                />
+                            </div>
+                        </Grid>
+
+                        <Grid item xs={12} md={12}>
+                            <div className="form-group">
+                                <TextField
+                                    id="form-nome"
+                                    className="input"
+                                    label="CEP"
+                                    style={{marginTop: 8, width: '100%'}}
+                                    margin="normal"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    fullWidth
+                                    variant="outlined"
+                                    value={cep}
+                                    onChange={event => setCep(event.target.value)}
                                 />
                             </div>
                         </Grid>
@@ -266,6 +368,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    value={email}
                                     onChange={event => setEmail(event.target.value)}
                                 />
                             </div>
@@ -284,6 +387,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    value={usuario}
                                     onChange={event => setUsuario(event.target.value)}
                                 />
                             </div>
@@ -302,6 +406,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    value={senha}
                                     onChange={event => setSenha(event.target.value)}
                                 />
                             </div>
@@ -320,6 +425,7 @@ function CadastroUsuario() {
                                     }}
                                     fullWidth
                                     variant="outlined"
+                                    value={confirmar}
                                     onChange={event => setCofirmar(event.target.value)}
                                 />
                             </div>
@@ -336,8 +442,12 @@ function CadastroUsuario() {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    inputProps={{
+                                        maxLength: 10,
+                                    }}
                                     fullWidth
                                     variant="outlined"
+                                    value={telefone}
                                     onChange={event => setTelefone(event.target.value)}
                                 />
                             </div>
@@ -354,8 +464,12 @@ function CadastroUsuario() {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    inputProps={{
+                                        maxLength: 10,
+                                    }}
                                     fullWidth
                                     variant="outlined"
+                                    value={cartao_sus}
                                     onChange={event => setCartao_sus(event.target.value)}
                                 />
                             </div>
