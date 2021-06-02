@@ -56,7 +56,6 @@ function CadastroUsuario() {
     };
 
     const handleNext = () => {
-        //setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
         const step = activeStep + 1;
 
@@ -96,6 +95,7 @@ function CadastroUsuario() {
                 api.post('cadastro/cadc', {
                     nome_completo,
                     nome_mae: "",
+                    cpf,
                     cns: numero,
                     sexo,
                     raca_cor: "",
@@ -108,7 +108,7 @@ function CadastroUsuario() {
                     telefone,
                     cartao_sus,
                     nascimento: '0000-00-00',
-                    paciente_funcionario: "paciente",
+                    paciente_funcionario: false,
                     senha
                 })
                     .then(function (response) {
@@ -517,7 +517,8 @@ function CadastroUsuario() {
 
                                 <Button
                                     style={{float: 'left', marginTop: 5}}
-                                    disabled={activeStep === 0} onClick={handleBack} className="btn-primary">
+                                    disabled={activeStep === 0 || activeStep == 2} onClick={handleBack}
+                                    className="btn-primary">
                                     Voltar
                                 </Button>
 

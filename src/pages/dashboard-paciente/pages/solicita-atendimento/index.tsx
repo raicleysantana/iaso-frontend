@@ -15,6 +15,7 @@ import {
 
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import './style.css';
+import api from "../../../../services/api";
 
 function PreAtendimento() {
 
@@ -95,6 +96,7 @@ function PreAtendimento() {
             isChecked: false,
         },
     ]);
+
     useEffect(() => {
 
     }, []);
@@ -104,9 +106,23 @@ function PreAtendimento() {
         setSintomas({sintomas: sintomas})
     }*/
 
-    const enviar = () => {
+    const enviar = async () => {
+        //await api
+        var str_sintomas: any[];
+        str_sintomas = [];
+        var str_condicoes: any[];
+        str_condicoes = [];
 
-        console.log(sintomas);
+        condicoes.filter(condicao => condicao.isChecked === true).map((item) => {
+            str_condicoes.push(item.value);
+        });
+
+        sintomas.filter(sintoma => sintoma.isChecked === true).map((item) => {
+            str_sintomas.push(item.value);
+        });
+
+        console.log(str_sintomas.join(", "));
+        return false;
     }
 
     const handleChange = async (event: React.FormEvent<HTMLInputElement>, index: any) => {

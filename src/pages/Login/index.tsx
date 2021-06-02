@@ -39,11 +39,30 @@ function Login() {
         await api.post('login/log', {
             nome, senha
         }).then(function (response) {
+
             if (response.data) {
                 const _id = response.data;
 
                 localStorage.setItem('id', _id);
-                history.push("/dashboard-paciente");
+
+
+                api.post(`/cadastro/load?id=${_id}`)
+                    .then(function (response) {
+                        const {codigo, nome_completo, paciente_funcionario} = response.data;
+                        const dados = response.data;
+                        localStorage.setItem('dados', JSON.stringify(dados));
+
+                        if (paciente_funcionario) {
+                            history.push('/dashboard-atendimento');
+                        } else {
+                            history.push("/dashboard-paciente");
+                        }
+                    }).catch(function (error) {
+                    alert(error);
+                });
+
+            } else {
+                alert('Usuário não encontrado');
             }
         }).catch(function (error) {
             alert(error);
