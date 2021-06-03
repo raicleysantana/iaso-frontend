@@ -1,0 +1,82 @@
+
+#home nav {
+    padding: 8px 15px;
+    height: auto;
+    width: 100%;
+    background-color: #f6f6f6;
+    border-bottom: 1px solid #dddbdb;
+}
+
+#home nav .logo-container {
+    display: block;
+}
+
+#home nav .logo {
+    width: 70px;
+}
+
+#home nav .titulo-logo {
+    display: inline-block;
+    color: var(--color-text-green);
+    font-weight: 600;
+    font-size: 20px;
+    vertical-align: top;
+    padding: 15px;
+}
+
+#home nav .menuitem {
+    float: right;
+    width: 50%;
+    padding: 15px;
+}
+
+#home nav .menuitem a .btn {
+    background-color: var(--color-text-green);
+    color: #FFFFFF;
+    padding: 10px 15px;
+    font-weight: 600;
+    margin: 0px 4px;
+    border-radius: 5px;
+    transition: background-color .4s;
+}
+
+#home nav .menuitem a .btn:hover {
+    background-color: #20687785;
+    cursor: pointer;
+}
+
+#home main.conteudo {
+    width: 100%;
+    display: block;
+    min-height: 450px;
+}
+
+#home main.conteudo .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    float: left;
+    width: 50%;
+    min-height: 400px;
+}
+
+#home main.conteudo .titulo {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+#home footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-text-green);
+    padding: 15px;
+    height: 100px;
+}
+
+#home footer p {
+
+    color: #FFFFFF;
+}
+
