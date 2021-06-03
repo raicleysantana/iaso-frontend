@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {
     AppBar, Button, Card, CardContent, FormControl, FormControlLabel, FormLabel, Grid,
@@ -7,10 +7,11 @@ import {
     Typography,
     Radio
 } from "@material-ui/core";
-import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import './style.css';
 import api from "../../services/api";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast} from 'react-toastify';
 
 function getSteps() {
     return ['Dados Pessoais', 'Criação de Conta', 'Confirmação'];
@@ -33,6 +34,7 @@ function CadastroUsuario() {
 
     const steps = getSteps();
 
+
     const [activeStep, setActiveStep] = React.useState(0);
     const [data_nascimento, setData_nascimento] = useState<Date | null>(new Date(''));
     const [nome_completo, setNome_clompleto] = useState('');
@@ -49,7 +51,6 @@ function CadastroUsuario() {
     const [cep, setCep] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmar, setCofirmar] = useState('');
-
 
     const handleDateChange = (date: Date | null) => {
         setData_nascimento(date);
@@ -73,25 +74,6 @@ function CadastroUsuario() {
             case 2:
                 let numero = Math.floor(Math.random() * 1000);
 
-                console.log(JSON.stringify({
-                    nome_completo,
-                    nome_mae: "",
-                    cpf,
-                    cns: numero,
-                    raca_cor: "",
-                    cep,
-                    bairro,
-                    rua,
-                    numero_casa,
-                    nacionalidade: "Brasileiro",
-                    naturalidade: "amazonas",
-                    telefone,
-                    cartao_sus,
-                    nascimento: '0000-00-00',
-                    paciente_funcionario: "paciente",
-                    senha
-                }));
-
                 api.post('cadastro/cadc', {
                     nome_completo,
                     nome_mae: "",
@@ -113,12 +95,37 @@ function CadastroUsuario() {
                 })
                     .then(function (response) {
                         if (response.data) {
-                            alert("Dados cadastrados com sucesso!")
+                            //alert("Dados cadastrados com sucesso!");
+                            toast.success('Dados cadastrados com sucesso!', {
+                                position: "top-right",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                            });
                         } else {
-                            alert("Error ao salvar");
+                            toast.error('Error ao salvar', {
+                                position: "top-right",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                            });
                         }
                     }).catch(function (error) {
-                    alert(error);
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 });
 
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -139,6 +146,7 @@ function CadastroUsuario() {
     };
 
     return (<>
+        <ToastContainer/>
         <AppBar position="static" color='inherit' className="barra-menu">
             <Toolbar variant="dense">
                 <Link to="/login">

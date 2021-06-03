@@ -16,6 +16,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './style.css';
 import logo from '../../assets/images/logo.png';
 import api from '../../services/api';
+import {ToastContainer, toast} from 'react-toastify';
 
 function Login() {
     const [nome, setNome] = useState('');
@@ -58,11 +59,26 @@ function Login() {
                             history.push("/dashboard-paciente");
                         }
                     }).catch(function (error) {
-                    alert(error);
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 });
-
             } else {
-                alert('Usuário não encontrado');
+                toast.error('Usuário não encontrado', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         }).catch(function (error) {
             alert(error);
@@ -75,6 +91,7 @@ function Login() {
 
     return (
         <>
+            <ToastContainer/>
             <AppBar position="static" color='inherit' className="barra-menu">
                 <Toolbar variant="dense">
                     <Link to="/">
